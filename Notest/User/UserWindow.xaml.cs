@@ -137,7 +137,7 @@ namespace Notest
                 Header.Content = null;
                 Topic.Content = null;
                 testList.Clear();
-                for (int i = Tabs.Items.Count - 1; i != 0; i--)
+                for (int i = Tabs.Items.Count - 1; i > -1; i--)
                 {
                     var tabIndex = Tabs.Items[i] as TabItem;
                     tabIndex.IsSelected = true;
@@ -229,6 +229,18 @@ namespace Notest
             {
                 MessageBox.Show("Невозможно выйти");
             }
+        }
+
+        private void OnMouseOver(object sender, MouseEventArgs e)
+        {
+            var image = sender as Image;
+            image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/opened_door.ico"));
+        }
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            var image = sender as Image;
+            image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/door.ico"));
         }
     }
 }

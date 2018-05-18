@@ -245,5 +245,11 @@
   <ItemGroup>
     <Resource Include="ico\book.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\opened_door.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="picture\3.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

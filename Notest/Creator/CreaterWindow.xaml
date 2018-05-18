@@ -60,8 +60,8 @@
                                                      Foreground="#e3e0de"
                                                      Width="30" Height="30"
                                                      HorizontalAlignment="Center"/>
-                        </StackPanel>                        
-                    </Button>                   
+                        </StackPanel>
+                    </Button>
                     <Button Name="SaveTest"
                             Width="90" Height="60"
                             Margin="0 -7 0 0"
@@ -75,10 +75,10 @@
                             <materialDesign:PackIcon Kind="ContentSaveOutline"
                                                  Foreground="#e3e0de"
                                                  Width="35" Height="35"
-                                                 HorizontalAlignment="Center"/> 
-                        </StackPanel>                       
+                                                 HorizontalAlignment="Center"/>
+                        </StackPanel>
                     </Button>
-                    
+
                     <Button Name="OpenTest"
                             Width="95" Height="60"
                             ToolTip="Открыть тест"
@@ -93,9 +93,9 @@
                                                      Foreground="#e3e0de"
                                                      Width="35" Height="35"
                                                      HorizontalAlignment="Center"/>
-                        </StackPanel>                        
+                        </StackPanel>
                     </Button>
-                    
+
                 </Grid>
                 <Grid Name="QuestionTools"  Margin="5,5,65,5" Visibility="Visible">
                     <Rectangle   Fill="#0e0e13"
@@ -119,8 +119,8 @@
                                                  Width="30" Height="35"
                                                  HorizontalAlignment="Center"/>
                         </StackPanel>
-                        
-                    </Button>                    
+
+                    </Button>
                     <Button Width="155" Height="60"
                             ToolTip="Remove Question"
                             Background="{x:Null}"
@@ -138,20 +138,20 @@
                                                  Width="30" Height="35"
                                                  HorizontalAlignment="Center" />
                         </StackPanel>
-                       
-                    </Button>                    
+
+                    </Button>
                 </Grid>
-                <Button Width="80" Height="60"
+                <Button Width="98" Height="60"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
                         ToolTip="Выход"
-                        Margin="0 0 15 0"
+                        Margin="0,0,15,0.8"
                         Click="GoOut">
                     <Image Source="../ico/door.ico"
                            Width="75" Height="55"
-                           VerticalAlignment="Center"/>
+                           VerticalAlignment="Center" MouseEnter="OnMouseOver" MouseLeave="OnMouseLeave"/>
                 </Button>
-            </StackPanel>            
+            </StackPanel>
             <StackPanel Name="TestToolsWindow"
                         Orientation="Horizontal"
                         Grid.Row="1">

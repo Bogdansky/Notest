@@ -429,6 +429,19 @@ namespace Notest
             TestResults results = new TestResults();
             results.ShowDialog();
         }
+
+
+        private void OnMouseOver(object sender, MouseEventArgs e)
+        {
+            var image = sender as System.Windows.Controls.Image;
+            image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/opened_door.ico"));
+        }
+
+        private void OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            var image = sender as System.Windows.Controls.Image;
+            image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/door.ico"));
+        }
     }
 }
 

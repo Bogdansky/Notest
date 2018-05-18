@@ -145,6 +145,7 @@ namespace Notest
                     db.CompletedTest.Add(completedTest);
                     db.SaveChanges();
                 }
+                FinishHim();
             }
             catch
             {
@@ -172,7 +173,11 @@ namespace Notest
             {
                 Expander expander = new Expander
                 {
-                    Header = question.Question1
+                    Header = new TextBlock
+                    {
+                        TextWrapping = TextWrapping.Wrap,
+                        Text = question.Question1
+                    }
                 };
                 expander.Expanded += OnThisExpanded;
                 WrapPanel wrapPanel = new WrapPanel(); // контейнер для вопроса
@@ -200,7 +205,11 @@ namespace Notest
                 {
                     CheckBox variant = new CheckBox
                     {
-                        Content = answer.Answer1
+                        Content = new TextBlock
+                        {
+                            TextWrapping = TextWrapping.Wrap,
+                            Text = answer.Answer1
+                        }
                     };
                     answersPanel.Children.Add(variant);
                     if (answer.IsRight)
@@ -233,18 +242,25 @@ namespace Notest
         // чтобы открывался только один Expander
         private void OnThisExpanded(object sender, RoutedEventArgs e)
         {
-            var thisExpander = (Expander)sender;
-            var stackParent = (StackPanel)thisExpander.Parent;
-            foreach (UIElement child in stackParent.Children)
+            var thisExpander = (Expander)sender; // получаем открываемый expander
+            var stackParent = (StackPanel)thisExpander.Parent; // получаем контейнер с вопросами
+            foreach (UIElement child in stackParent.Children) // проходимся по всем элементам
             {
-                if (child is Expander exChild)
+                if (child is Expander exChild) 
                 {
-                    if (exChild != thisExpander)
+                    if (exChild != thisExpander) // если данный элемент expander, но не текущий, то закрываем его 
                     {
                         exChild.IsExpanded = false;
                     }
                 }
             }
+        }
+
+        private void FinishHim()
+        {
+            UserWindow userWindow = new UserWindow();
+            userWindow.Show();
+            Close();
         }
     }
 }
