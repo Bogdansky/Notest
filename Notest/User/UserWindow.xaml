@@ -14,13 +14,6 @@
         <Style x:Key="ds" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-        <Style x:Key="OpenDoor">
-            <Style.Triggers>
-                <EventTrigger>
-
-                </EventTrigger>
-            </Style.Triggers>
-        </Style>
     </Window.Resources>
     <Viewbox Stretch="Fill">
         <Grid>
@@ -38,6 +31,12 @@
                            Width="140"
                            FontSize="20">
                 </TextBlock>
+                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="270,0,0,0" Click="OnChanging" Padding="0,0,0,0">
+                    <materialDesign:PackIcon Kind="Rotate3d"
+                                                 Foreground="#e3e0de"
+                                                 Width="Auto" Height="Auto"
+                                                 HorizontalAlignment="Center"/>
+                </Button>
                 <Button Width="99" Height="60"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
@@ -49,7 +48,18 @@
                            VerticalAlignment="Center" MouseEnter="OnMouseOver" MouseLeave="OnMouseLeave"/>
                 </Button>
             </StackPanel>
-            <StackPanel Grid.Row="1" Width="360" Height="335" Orientation="Vertical" Background="White">
+            <StackPanel Grid.Row="1" Width="800" Orientation="Vertical" Background="White" Name="First">
+                <Viewbox>
+                    <DataGrid Name="TestGrid" VerticalScrollBarVisibility="Auto" Width="800" Height="490" SelectionChanged="Test_SelectionChanged" ColumnWidth="*"
+                              HorizontalScrollBarVisibility="Auto" IsReadOnly="True">
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                        <DataGridTextColumn Binding="{Binding Topic}" Header="Тема"/>
+                        <DataGridTextColumn Binding="{Binding Header}" Header="Название"/>
+                        <DataGridTextColumn Binding="{Binding Author}" Header="Author"/>
+                    </DataGrid>
+                </Viewbox>
+            </StackPanel>
+            <StackPanel Name="Second" Grid.Row="1" Width="360" Height="335" Orientation="Vertical" Background="White" Visibility="Collapsed">
                 <Viewbox>
                     <TabControl Name="Tabs" Width="348" Height="200.8">
                         <TabItem Header="Поиск по теме" GotFocus="OnSearchTypeSelected">
@@ -70,15 +80,14 @@
                         <TabItem Header="По названию" VerticalContentAlignment="Center" GotFocus="OnSearchTypeSelected">
                             <StackPanel Margin="10,0,10,0" VerticalAlignment="Center">
                                 <TextBox Margin="10,0,10,10" Name="ByHeader" TextChanged="OnSearchBeginByHeader" materialDesign:HintAssist.Hint="Название"/>
-                                <!---->
                                 <ComboBox x:Name="Headers" SelectionChanged="OnHeaderSelected" Margin="10,0,10,10" IsEnabled="False"/>
                             </StackPanel>
                         </TabItem>
                     </TabControl>
                 </Viewbox>
                 <Viewbox Height="127">
-                    <StackPanel Height="129" Name="Tools" Margin="0,0,-0.4,0">
-                        <StackPanel Orientation="Horizontal" Name="Info">
+                    <StackPanel Height="129" Margin="0,0,-0.4,0">
+                        <StackPanel Orientation="Horizontal">
                             <Label>Автор</Label>
                             <Label x:Name="Author"/>
                             <Label>Тема</Label>

@@ -21,13 +21,17 @@ namespace Notest
     public partial class UserWindow : Window
     {
         List<Test> testList = new List<Test>();
-        int testID;
         Search tab;
 
         public UserWindow()
         {
             InitializeComponent();
             UserLogin.Text = Class.CurrentUser.user != null ? Class.CurrentUser.user.Login : "Неизвестный";
+            TestGrid.Items.Clear();
+            using (Context db = new Context())
+            {
+                TestGrid.ItemsSource = db.Tests.ToList();
+            }
         }
 
         private void OnSearchBeginByTheme(object sender, TextChangedEventArgs e)
@@ -90,7 +94,7 @@ namespace Notest
                 Header.Content = test.Header;
                 Topic.Content = test.Topic;
                 Author.Content = test.Author;
-                testID = test.Id;
+                CurrentTest.test = test;
             }
         }
 
@@ -109,6 +113,7 @@ namespace Notest
                         Headers.Items.Add(test.Header);
                         testList.Add(test);
                     }
+                    Headers.SelectedItem = Headers.Items[0];
                 }
             }
         }
@@ -120,16 +125,15 @@ namespace Notest
             {
                 if ((string)Header.Content != "")
                 {
-                    using (StreamWriter writer = new StreamWriter("choosen.txt", false))
-                    {
-                        writer.WriteLine(testID);
-                    }
                     ChooseTest chooseTest = new ChooseTest();
                     chooseTest.Show();
                     this.Close();
                 }
-                GetStatus("Вы не выбрали тест!", 2);
-                e.Handled = true;
+                else
+                {
+                    GetStatus("Вы не выбрали тест!", 2);
+                    e.Handled = true;
+                }
             }
             else
             {
@@ -142,7 +146,6 @@ namespace Notest
                     var tabIndex = Tabs.Items[i] as TabItem;
                     tabIndex.IsSelected = true;
                 }
-                testID = 0;
             }
         }
 
@@ -242,5 +245,6 @@ namespace Notest
             var image = sender as Image;
             image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/door.ico"));
         }
+
     }
 }

@@ -21,8 +21,6 @@ namespace Notest
     /// </summary>
     public partial class ChooseTest : Window
     {
-        int testID;
-
         public ChooseTest()
         {
             InitializeComponent();
@@ -30,13 +28,9 @@ namespace Notest
             {
                 string topic = "";
                 string header = "";
-                using (StreamReader reader = new StreamReader("choosen.txt"))
-                {
-                    testID = Convert.ToInt32(reader.ReadLine());
-                }
                 using (Context db = new Context())
                 {
-                    var test = db.Tests.Where(t => t.Id == testID).First();
+                    var test = db.Tests.Where(t => t.Id == CurrentTest.test.Id).First();
                     FillTest(db); // заполнение теста
                     topic = test.Topic;
                     header = test.Header;
@@ -139,7 +133,7 @@ namespace Notest
                     CompletedTest completedTest = new CompletedTest
                     {
                         Result = result,
-                        TestId = testID,
+                        TestId = CurrentTest.test.Id,
                         UserLogin = Class.CurrentUser.user.Login
                     };
                     db.CompletedTest.Add(completedTest);
@@ -163,12 +157,11 @@ namespace Notest
             double resultMark = (current / (double)total) * weight; //total
             return (int)Math.Round(resultMark);
         }
-
-
+        
         private void FillTest(Context db)
         {
             int counter = 1;
-            var questions = from question in db.Questions where question.Test_Id == testID select question;
+            var questions = from question in db.Questions where question.Test_Id == CurrentTest.test.Id select question;
             foreach (Question question in questions)
             {
                 Expander expander = new Expander

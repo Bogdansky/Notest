@@ -104,6 +104,7 @@
     <Compile Include="User\TestResults.xaml.cs">
       <DependentUpon>TestResults.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User\UserWindow.cs" />
     <Compile Include="User\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
