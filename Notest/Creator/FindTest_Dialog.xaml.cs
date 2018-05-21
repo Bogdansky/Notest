@@ -22,47 +22,41 @@ namespace Notest
         public FindTest_Dialog()
         {
             InitializeComponent();
+            using (Context db = new Context())
+            {
+                List<Test> tests = new List<Test>();
+                tests.AddRange(db.Tests);
+                AllTests.ItemsSource = tests;
+            }
         }
 
         private void FindTestButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (TestTheme.Text.Length != 0 && TestName.Text.Length != 0)
+                if (AllTests.SelectedIndex != -1)
                 {
-                    using (Context db = new Context())
-                    {
-                        var tests = db.Tests;
-                        foreach (Test t in tests)
-                        {
-                            if (TestTheme.Text == t.Topic && TestName.Text == t.Header)
-                            {
-                                CurrentTest.test = new Test();
-                                CurrentTest.test = t;
-                                DialogResult = true;
-                            }
-                        }
-
-                        if (CurrentTest.test == null)
-                        {
-                            DialogResult = false;
-                            MessageBox.Show("Тест не найден");
-                        }
-                    }
-
+                    CurrentTest.test = AllTests.SelectedItem as Test;
+                    DialogResult = true;
                 }
                 else
                 {
-                    
-                    MessageBox.Show("Введите данные!");
+                    MessageBox.Show("No test selected");
+                    DialogResult = false;
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DialogResult = false;
                 MessageBox.Show(ex.Message);
             }
         }
+        #region кнопки для окна
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        #endregion
     }
 }

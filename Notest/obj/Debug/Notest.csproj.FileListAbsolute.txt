@@ -257,3 +257,5 @@ C:\Users\User\Desktop\Notest\Notest\obj\Debug\Notest.exe
 C:\Users\User\Desktop\Notest\Notest\obj\Debug\Notest.pdb
 C:\Users\User\Desktop\Notest\Notest\obj\Debug\User\MyResults.g.cs
 C:\Users\User\Desktop\Notest\Notest\obj\Debug\User\MyResults.baml
+C:\Users\User\Desktop\Notest\Notest\obj\Debug\Creator\AddQuestions.g.cs
+C:\Users\User\Desktop\Notest\Notest\obj\Debug\Creator\AddQuestions.baml

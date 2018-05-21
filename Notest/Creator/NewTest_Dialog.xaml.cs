@@ -28,9 +28,9 @@ namespace Notest
         {
             try
             {
-                if(TestTheme.Text.Length!=0 && TestName.Text.Length!=0)
+                if (TestTheme.Text.Length != 0 && TestName.Text.Length != 0)
                 {
-                    if(Validation.IsTestExist(TestTheme.Text, TestName.Text) == false)
+                    if (Validation.IsTestExist(TestTheme.Text, TestName.Text) == false)
                     {
                         CurrentTest.test = new Test
                         {
@@ -48,13 +48,19 @@ namespace Notest
                 {
                     DialogResult = false;
                     MessageBox.Show("Введите данные!");
-                }            
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 DialogResult = false;
                 MessageBox.Show(ex.Message);
             }
         }
+        #region кнопки для окна
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        #endregion
     }
 }

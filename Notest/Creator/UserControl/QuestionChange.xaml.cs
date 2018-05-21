@@ -14,12 +14,14 @@ namespace Notest
     {
         public QuestionChange()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         //проверка questionCost
         private void OnQuestionCostChanged(object sender, TextChangedEventArgs e)
         {
+            questionCosttxb.ToolTip = "";
+            questionCosttxb.BorderBrush = new SolidColorBrush(Colors.Gray);
             string regex = @"[0-9]";
 
             for (int i = 0; i < questionCosttxb.Text.Length; i++)
@@ -27,11 +29,13 @@ namespace Notest
                 if (Regex.IsMatch(questionCosttxb.Text[i].ToString(), regex) == false)
                 {
                     questionCosttxb.ToolTip = "Неккоректные данные";
-                    questionCosttxb.BorderBrush = new SolidColorBrush(Colors.IndianRed); 
+                    questionCosttxb.BorderBrush = new SolidColorBrush(Colors.IndianRed);
                 }
             }
         }
-       
+
+
+        #region картинка
         //добавление картинки
         private void AddImage_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +54,7 @@ namespace Notest
                     PictureBox.Source = new BitmapImage(new Uri(op.FileName));
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Ощибка загрузки изображения: " + ex.Message);
             }
@@ -64,10 +68,17 @@ namespace Notest
                 if (PictureBox.Source.ToString().Length != 0)
                     PictureBox.Source = null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Ошибка: " + ex.Message);
             }
+        }
+        #endregion
+
+        //добавление ответа
+        private void AddAnswer_Click(object sender, RoutedEventArgs e)
+        {
+            AnswerDtgrd.CanUserAddRows = true;
         }
     }
 }

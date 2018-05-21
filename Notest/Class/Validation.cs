@@ -15,24 +15,22 @@ namespace Notest
 {
     public static class Validation
     {
-      
-
         //ПРОВЕРКА на повторение логина
         public static bool NoRepeatLogin(string s)
         {
-            bool isNoRepeat = true;          
+            bool isNoRepeat = true;
 
             using (Context db = new Context())
             {
                 try
-                {                 
+                {
                     // получаем объекты из бд и выводим на консоль
                     var users = db.Users;
                     foreach (User u in users)
                     {
-                        if(s == u.Login )
+                        if (s == u.Login)
                         {
-                            isNoRepeat = false;                           
+                            isNoRepeat = false;
                         }
                     }
                 }
@@ -52,7 +50,7 @@ namespace Notest
                 {
                     MessageBox.Show(ex.Message);
                 }
-            }           
+            }
             return isNoRepeat;
         }
 
@@ -79,7 +77,7 @@ namespace Notest
         }
 
         //проверка на существование теста
-        public static bool IsTestExist (string topic, string header)
+        public static bool IsTestExist(string topic, string header)
         {
             bool isExist = false;
 
@@ -87,9 +85,9 @@ namespace Notest
             {
                 var tests = db.Tests;
 
-                foreach(Test t in tests)
+                foreach (Test t in tests)
                 {
-                    if(t.Topic == topic && t.Header == header)
+                    if (t.Topic == topic && t.Header == header)
                     {
                         isExist = true;
                     }
@@ -100,8 +98,9 @@ namespace Notest
         }
     }
 
-        public partial class MainWindow : Window
-        {
+    public partial class MainWindow : Window
+    {
+
         //корректность логина
         private bool CheckLogin(TextBox login, Image image)
         {
@@ -132,7 +131,7 @@ namespace Notest
                     toolTip.Content = "Данный логин уже существует";
                 }
             }
-           
+
             if (valid == false)
             {
                 login.BorderBrush = new SolidColorBrush(Colors.IndianRed);
@@ -174,6 +173,6 @@ namespace Notest
             return valid;
         }
 
-       
+
     }
 }

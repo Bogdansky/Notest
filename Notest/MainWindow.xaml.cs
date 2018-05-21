@@ -27,7 +27,6 @@ namespace Notest
             {
                 try
                 {
-                    // создаем User                                           
                     User user = new User
                     {
                         Login = NewLogin.Text,
@@ -39,11 +38,11 @@ namespace Notest
 
                     // Создание подключения                  
                     using (Context db = new Context())
-                    {                     
+                    {
                         // добавляем их в бд
                         db.Users.Add(user);
                         db.SaveChanges();
-                        MessageBox.Show("Объект успешно сохранен");
+                        MessageBox.Show("Welcome, " + Class.CurrentUser.user.Login + " !", "", MessageBoxButton.OK, MessageBoxImage.None);
 
                         switch (UserType.SelectedIndex)
                         {
@@ -60,9 +59,9 @@ namespace Notest
                         }
                     }
                 }
-                catch(Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message);
+
                 }
             }
         }
@@ -84,18 +83,17 @@ namespace Notest
                     };
                     Class.CurrentUser.user = user;
 
-                    // Создание подключения                  
                     using (Context db = new Context())
                     {
                         var users = db.Users;
-                        bool isUserFind = false;                       
+                        bool isUserFind = false;
 
                         foreach (User u in users)
                         {
                             if (user.Password == u.Password && user.Login == u.Login)
                             {
                                 isUserFind = true;
-
+                                MessageBox.Show("Welcome, " + Class.CurrentUser.user.Login + " !", "", MessageBoxButton.OK, MessageBoxImage.None);
                                 if (u.UserType == "User")
                                 {
                                     UserWindow userWindow = new UserWindow();
@@ -109,21 +107,33 @@ namespace Notest
                                     this.Close();
                                 }
                             }
-                           
                         }
-                        if(isUserFind == false)
+                        if (isUserFind == false)
                         {
-                            MessageBox.Show("Проверьте корректность введённых данных");
+                            MessageBox.Show("Check the entered data", "", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
 
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message);
                 }
             }
         }
+
+        #region кнопки для окна
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void HideWindow_Click(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
+        #endregion
+
+
     }
 
 

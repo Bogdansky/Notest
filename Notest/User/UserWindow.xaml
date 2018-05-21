@@ -3,60 +3,123 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
         xmlns:local="clr-namespace:Notest"
         mc:Ignorable="d"
-           Title="Notest" Height="500" Width="800" Icon ="../ico/main.ico">
-    <!--<Window.Background>
-        <ImageBrush ImageSource="Notest/picture/3.jpg" />
-    </Window.Background>-->
+        Title="Notest"
+        Height="525" Width="800"
+        WindowStyle="None" AllowsTransparency="True"
+        Icon ="../ico/main.ico">
+    <Window.Background>
+        <ImageBrush ImageSource="../picture/1.jpg" />
+    </Window.Background>
     <Window.Resources>
         <Style x:Key="ds" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="OpenDoor">
+            <Style.Triggers>
+                <EventTrigger/>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Viewbox Stretch="Fill">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="490"/>
             </Grid.RowDefinitions>
-            <StackPanel  Grid.Row="0" Orientation="Horizontal" Background="#373940" >
+            <Grid Grid.Row="0" Background="#373940">
+                <Button Width="45" Height="Auto"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 80 0"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        Click="HideWindow_Click">
+
+                    <Image Source="..\ico\minimize.png"
+                                             Width="25" Height="25"
+                                             HorizontalAlignment="Center"
+                                             Margin="0 -7 0 0"
+                                             />
+                </Button>
+                <Button Name="Fullscreen"
+                        Width="45" Height="Auto"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 40 0"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"                        
+                        Click="Fullscreen_Click">
+                    <materialDesign:PackIcon Kind="Fullscreen"
+                                             Width="25" Height="20"
+                                             HorizontalAlignment="Center"/>
+                </Button>
+                <Button Name="FullscreenExit"
+                        Width="45" Height="Auto"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 40 0"
+                        Visibility="Hidden"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"                        
+                        Click="FullscreenExit_Click">
+                    <materialDesign:PackIcon Kind="FullscreenExit"
+                                             Width="25" Height="20"
+                                             HorizontalAlignment="Center"/>
+                </Button>
+                <Button Width="43" Height="Auto"
+                        HorizontalAlignment="Right"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}" 
+                        Click="CloseWindow_Click">
+                    <materialDesign:PackIcon Kind="WindowClose"
+                                             Width="27" Height="21"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             />
+                </Button>
+            </Grid>
+            <Grid  Grid.Row="1" Background="#373940" >
                 <Image Source="../ico/book.ico"  
                            Width="65" Height="55"
-                           Margin="15 0 0 0"/>
+                           HorizontalAlignment="Left"/>
                 <TextBlock x:Name="UserLogin"
-                           Margin="15,20,0,10"
+                           HorizontalAlignment="Left"
+                           Margin="75 15 15 15"
                            Foreground="#e3e0de"
                            Width="140"
                            FontSize="20">
                 </TextBlock>
-                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="230,0,0,0" Click="OnChanging" Padding="0,0,0,0">
-                    <materialDesign:PackIcon Kind="Rotate3d"
-                                                 Foreground="#e3e0de"
-                                                 Width="Auto" Height="Auto"
-                                                 HorizontalAlignment="Center"/>
-                </Button>
-                <Label VerticalContentAlignment="Center" Content="Изменить метод выбора" Margin="20,0,0,0" Foreground="Azure"/>
-                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="20,0,0,0" Click="OnWatchResults">
+                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="471,8,310.4,7.8" Click="OnWatchResults">
                     <materialDesign:PackIcon Kind="Table"
                                                  Foreground="#e3e0de"
                                                  Width="Auto" Height="Auto"
                                                  HorizontalAlignment="Center"/>
                 </Button>
-                <Label VerticalContentAlignment="Center" Margin="20,0,0,0" Foreground="Azure">Просмотреть результаты</Label>
-                <Button Width="99" Height="60"
+                <Label Height="45" Foreground="Azure" VerticalContentAlignment="Center" Margin="541,8,204,7.8">Мои результаты</Label>
+                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="220,8,561.4,7.8" Click="OnChanging" Padding="0,0,0,0">
+                    <materialDesign:PackIcon Kind="Rotate3d"
+                                                 Foreground="#e3e0de"
+                                                 Width="Auto" Height="Auto"
+                                                 HorizontalAlignment="Center"/>
+                </Button>
+                <Label Height="45" Margin="285,8,440.4,7.8" Foreground="Azure" VerticalContentAlignment="Center">Поиск/Выбор теста</Label>
+                <Button Width="100" Height="60"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
                         ToolTip="Выход"
-                        Margin="500,0,15,0.8"
+                        HorizontalAlignment="Right"
+                        Margin="5"
                         Click="GoOut">
                     <Image Source="../ico/door.ico"
                            Width="75" Height="55"
-                           VerticalAlignment="Center" MouseEnter="OnMouseOver" MouseLeave="OnMouseLeave"/>
+                           VerticalAlignment="Center"
+                           MouseEnter="OnMouseOver"
+                           MouseLeave="OnMouseLeave"/>
                 </Button>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Width="800" Orientation="Vertical" Background="White" Name="First">
+            </Grid>
+
+            <StackPanel Grid.Row="2" Orientation="Vertical" Background="White" Name="First">
                 <Viewbox>
                     <DataGrid Name="TestGrid" VerticalScrollBarVisibility="Auto" Width="800" Height="490" SelectionChanged="Test_SelectionChanged" ColumnWidth="*"
                               HorizontalScrollBarVisibility="Auto" IsReadOnly="True">
@@ -67,44 +130,73 @@
                     </DataGrid>
                 </Viewbox>
             </StackPanel>
-            <StackPanel Name="Second" Grid.Row="1" Width="360" Height="335" Orientation="Vertical" Background="White" Visibility="Collapsed">
+            <StackPanel Grid.Row="2" Height="350" Orientation="Vertical" Margin="287,10,233,120" Name="Second" Visibility="Collapsed">
                 <Viewbox>
-                    <TabControl Name="Tabs" Width="348" Height="200.8">
-                        <TabItem Header="Поиск по теме" GotFocus="OnSearchTypeSelected">
+                    <TabControl Width="326" Height="274" Background="{x:Null}" Name="Tabs">
+                        <TabItem Header="Поиск по теме"
+                                 Background="{x:Null}"
+                                 GotFocus="OnSearchTypeSelected"
+                                 Height="25" Width="100"                                 
+                                 VerticalAlignment="Bottom">
                             <StackPanel>
                                 <StackPanel Name="SearchByTheme" Height="200">
-                                    <TextBox x:Name="ByTopic" TextChanged="OnSearchBeginByTheme" Margin="0,20,0,0" materialDesign:HintAssist.Hint="Тема"/>
-                                    <Label>Выберите тему:</Label>
-                                    <ComboBox x:Name="SelectedTopics" IsEnabled="False" SelectionChanged="OnTopicSelected"/>
-                                    <Label >Выберите название:</Label>
-                                    <ComboBox x:Name="SelectedHeaders" IsEnabled="False" SelectionChanged="OnHeaderSelected"/>
+                                    <TextBox x:Name="ByTopic"
+                                             TextChanged="OnSearchBeginByTheme"
+                                             Margin="0,20,0,0"
+                                             materialDesign:HintAssist.Hint="Topic"/>
+                                    <Label Content="Select a topic:"/>
+                                    <ComboBox x:Name="SelectedTopics"
+                                              IsEnabled="False"
+                                              SelectionChanged="OnTopicSelected"/>
+                                    <Label Content="Select a header:"/>
+                                    <ComboBox x:Name="SelectedHeaders"
+                                              IsEnabled="False"
+                                              SelectionChanged="OnHeaderSelected"/>
                                 </StackPanel>
-                                <StackPanel Name="SearchByName" Height="200" Visibility="Collapsed">
+                                <StackPanel Name="SearchByName"
+                                            Height="200"
+                                            Visibility="Collapsed">
                                     <Label Margin="0,10.8,0.4,11.6">Тема</Label>
                                     <ComboBox x:Name="SelectHeaders" Height="30" IsEnabled="False" SelectionChanged="OnHeaderSelected" Margin="0,41.4,0.4,9.8"/>
                                 </StackPanel>
                             </StackPanel>
                         </TabItem>
-                        <TabItem Header="По названию" VerticalContentAlignment="Center" GotFocus="OnSearchTypeSelected">
+                        <TabItem Header="По названию"
+                                 Background="{x:Null}"
+                                 Width="100" Height="25"
+                                 VerticalContentAlignment="Center"
+                                 GotFocus="OnSearchTypeSelected">
                             <StackPanel Margin="10,0,10,0" VerticalAlignment="Center">
-                                <TextBox Margin="10,0,10,10" Name="ByHeader" TextChanged="OnSearchBeginByHeader" materialDesign:HintAssist.Hint="Название"/>
-                                <ComboBox x:Name="Headers" SelectionChanged="OnHeaderSelected" Margin="10,0,10,10" IsEnabled="False"/>
+                                <TextBox  Name="ByHeader" 
+                                          materialDesign:HintAssist.Hint="Header"
+                                          Margin="10,0,10,10"
+                                          TextChanged="OnSearchBeginByHeader"/>
+                                <ComboBox x:Name="Headers"
+                                          SelectionChanged="OnHeaderSelected"
+                                          Margin="10,0,10,10" IsEnabled="False"/>
                             </StackPanel>
                         </TabItem>
                     </TabControl>
                 </Viewbox>
                 <Viewbox Height="127">
-                    <StackPanel Height="129" Margin="0,0,-0.4,0">
-                        <StackPanel Orientation="Horizontal">
-                            <Label>Автор</Label>
-                            <Label x:Name="Author"/>
-                            <Label>Тема</Label>
-                            <Label x:Name="Topic"/>
-                            <Label>Название</Label>
-                            <Label x:Name="Header"/>
+                    <StackPanel Height="129" Name="Tools" Margin="0,0,-0.4,0" Width="331">
+                        <StackPanel Orientation="Horizontal" Name="Info">
+                            <Label Content="Author" />
+                            <Label x:Name="Author"
+                                   Width="80"/>
+                            <Label Content="Topic"/>
+                            <Label x:Name="Topic"
+                                   Width="80"/>
+                            <Label Content="Header" />
+                            <Label x:Name="Header"
+                                   Width="80"/>
                         </StackPanel>
-                        <Button Content="Выбрать тест" Margin="42.6,18.4,42.6,26.8" Click="OnChooseTest"/>
-                        <Label x:Name="Status" Width="350" HorizontalContentAlignment="Center" />
+                        <Button Content="Select a test"
+                                Margin="42.6,18.4,42.6,26.8"
+                                Click="OnChooseTest"/>
+                        <Label x:Name="Status" 
+                               Width="350" Height="30"
+                               HorizontalContentAlignment="Center" />
                     </StackPanel>
                 </Viewbox>
             </StackPanel>

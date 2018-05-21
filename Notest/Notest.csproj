@@ -88,6 +88,9 @@
     </ApplicationDefinition>
     <Compile Include="Class\Completed.cs" />
     <Compile Include="Class\CurrentTest.cs" />
+    <Compile Include="Creator\AddQuestions.xaml.cs">
+      <DependentUpon>AddQuestions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Creator\FindTest_Dialog.xaml.cs">
       <DependentUpon>FindTest_Dialog.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
     <Compile Include="User\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Creator\AddQuestions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Creator\CreaterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,7 +264,14 @@
     <Resource Include="ico\opened_door.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="picture\3.jpg" />
+    <Resource Include="picture\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico\minimize.png" />
+    <Resource Include="ico\results.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="picture\6.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
