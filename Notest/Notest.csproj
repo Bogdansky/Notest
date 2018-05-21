@@ -101,6 +101,9 @@
     <Compile Include="User\ChooseTest.xaml.cs">
       <DependentUpon>ChooseTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User\MyResults.xaml.cs">
+      <DependentUpon>MyResults.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User\TestResults.xaml.cs">
       <DependentUpon>TestResults.xaml</DependentUpon>
     </Compile>
@@ -142,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User\ChooseTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\MyResults.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

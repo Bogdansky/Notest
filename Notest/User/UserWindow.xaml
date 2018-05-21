@@ -31,12 +31,20 @@
                            Width="140"
                            FontSize="20">
                 </TextBlock>
-                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="270,0,0,0" Click="OnChanging" Padding="0,0,0,0">
+                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="230,0,0,0" Click="OnChanging" Padding="0,0,0,0">
                     <materialDesign:PackIcon Kind="Rotate3d"
                                                  Foreground="#e3e0de"
                                                  Width="Auto" Height="Auto"
                                                  HorizontalAlignment="Center"/>
                 </Button>
+                <Label VerticalContentAlignment="Center" Content="Изменить метод выбора" Margin="20,0,0,0" Foreground="Azure"/>
+                <Button Width="65" Height="45" Background="#373940" BorderBrush="#373940" Margin="20,0,0,0" Click="OnWatchResults">
+                    <materialDesign:PackIcon Kind="Table"
+                                                 Foreground="#e3e0de"
+                                                 Width="Auto" Height="Auto"
+                                                 HorizontalAlignment="Center"/>
+                </Button>
+                <Label VerticalContentAlignment="Center" Margin="20,0,0,0" Foreground="Azure">Просмотреть результаты</Label>
                 <Button Width="99" Height="60"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"

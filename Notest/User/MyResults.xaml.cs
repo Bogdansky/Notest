@@ -15,24 +15,24 @@ using System.Windows.Shapes;
 namespace Notest
 {
     /// <summary>
-    /// Логика взаимодействия для TestResults.xaml
+    /// Логика взаимодействия для MyResults.xaml
     /// </summary>
-    public partial class TestResults : Window
+    public partial class MyResults : Window
     {
-        public TestResults()
+        public MyResults()
         {
             InitializeComponent();
             using (Context db = new Context())
             {
-                var completed = from compl in db.CompletedTest select compl;
+                var completed = from compl in db.CompletedTest where compl.UserLogin == Class.CurrentUser.user.Login select compl;
                 List<Class.Completed> completedTests = new List<Class.Completed>();
                 foreach (CompletedTest test in completed)
                 {
                     var currentTest = db.Tests.Where(t => t.Id == test.TestId).First();
                     Class.Completed compl = new Class.Completed
                     {
-                        Id = test.Id,
-                        UserLogin = test.UserLogin,
+                        Id = 0,
+                        UserLogin = "",
                         TestName = currentTest.Header,
                         TestTheme = currentTest.Topic,
                         Result = test.Result
@@ -40,20 +40,6 @@ namespace Notest
                     completedTests.Add(compl);
                 }
                 ResultGrid.ItemsSource = completedTests;
-            }
-        }
-        //выход в окно регистрации/входа
-        private void GoOut(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                MainWindow startWindow = new MainWindow();
-                Close();
-                startWindow.Show();
-            }
-            catch
-            {
-                MessageBox.Show("Невозможно выйти");
             }
         }
     }

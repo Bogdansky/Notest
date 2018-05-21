@@ -246,5 +246,10 @@ namespace Notest
             image.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/ico/door.ico"));
         }
 
+        private void OnWatchResults(object sender, RoutedEventArgs e)
+        {
+            MyResults results = new MyResults();
+            results.ShowDialog();
+        }
     }
 }
