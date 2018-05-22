@@ -36,22 +36,32 @@ namespace Notest
 
         private void OnSearchBeginByTheme(object sender, TextChangedEventArgs e)
         {
-            SelectedHeaders.Items.Clear();
-            SelectedTopics.Items.Clear();
-            using (Context db = new Context())
+            ClearByTopic();
+            if (ByTopic.Text != "")
             {
-                var topics = from test in db.Tests where test.Topic.StartsWith(ByTopic.Text) select test.Topic;
-                if (topics.Count() > 0)
+                using (Context db = new Context())
                 {
-                    testList.Clear();
-                    SelectedTopics.IsEnabled = true;
-                    foreach (string topic in topics)
+                    var topics = from test in db.Tests where test.Topic.StartsWith(ByTopic.Text) select test.Topic;
+                    if (topics.Count() > 0)
                     {
-                        SelectedTopics.Items.Add(topic);
+                        testList.Clear();
+                        SelectedTopics.IsEnabled = true;
+                        foreach (string topic in topics)
+                        {
+                            SelectedTopics.Items.Add(topic);
+                        }
+                        SelectedTopics.SelectedItem = SelectedTopics.Items[0];
                     }
-                    SelectedTopics.SelectedItem = SelectedTopics.Items[0];
                 }
             }
+        }
+
+        private void ClearByTopic()
+        {
+            SelectedHeaders.Items.Clear();
+            SelectedTopics.Items.Clear();
+            SelectedHeaders.IsEnabled = false;
+            SelectedTopics.IsEnabled = false;
         }
 
         private void OnTopicSelected(object sender, SelectionChangedEventArgs e)
@@ -100,27 +110,37 @@ namespace Notest
 
         private void OnSearchBeginByHeader(object sender, TextChangedEventArgs e)
         {
-            Headers.Items.Clear();
-            testList.Clear();
-            using (Context db = new Context())
+            ClearByHeader();
+            if (ByHeader.Text != "")
             {
-                var tests = from test in db.Tests where test.Header.StartsWith(ByHeader.Text) select test;
-                if (tests.Count() > 0)
+                using (Context db = new Context())
                 {
-                    Headers.IsEnabled = true;
-                    foreach (Test test in tests)
+                    var tests = from test in db.Tests where test.Header.StartsWith(ByHeader.Text) select test;
+                    if (tests.Count() > 0)
                     {
-                        Headers.Items.Add(test.Header);
-                        testList.Add(test);
+                        Headers.IsEnabled = true;
+                        foreach (Test test in tests)
+                        {
+                            Headers.Items.Add(test.Header);
+                            testList.Add(test);
+                        }
+                        Headers.SelectedItem = Headers.Items[0];
                     }
-                    Headers.SelectedItem = Headers.Items[0];
                 }
             }
         }
 
+        // очистить таб поиска по названию
+        private void ClearByHeader()
+        {
+            Headers.Items.Clear();
+            testList.Clear();
+            Headers.IsEnabled = false;
+        }
+
         private void OnChooseTest(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show($"Выбрать тест {Header.Content}?", "Уверены?", MessageBoxButton.YesNo);
+            var result = MessageBox.Show($"Do you want to select \"{Header.Content}\"?", "Sure?", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 if ((string)Header.Content != "")
@@ -131,7 +151,7 @@ namespace Notest
                 }
                 else
                 {
-                    GetStatus("Вы не выбрали тест!", 2);
+                    GetStatus("You didn't choose a test!", 2);
                     e.Handled = true;
                 }
             }
@@ -171,15 +191,6 @@ namespace Notest
             }
         }
 
-        private void OnLoadedWindow(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void OnCloseWindow(object sender, EventArgs e)
-        {
-
-        }
-
         private void OnTabChanged(object sender, SelectionChangedEventArgs e)
         {
             TabControl tabs = sender as TabControl;
@@ -189,7 +200,7 @@ namespace Notest
         private void OnSearchTypeSelected(object sender, RoutedEventArgs e)
         {
             var selectedTab = sender as TabItem;
-            if (selectedTab.Header.ToString().Equals("Поиск по теме"))
+            if (selectedTab.Header.ToString().Equals("By topic"))
             {
                 tab = Search.Topic;
                 DisposeHeader();
@@ -230,7 +241,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Невозможно выйти");
+                MessageBox.Show("It is impossible");
             }
         }
 

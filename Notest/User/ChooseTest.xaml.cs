@@ -24,7 +24,7 @@ namespace Notest
         public ChooseTest()
         {
             InitializeComponent();
-            if (File.Exists("choosen.txt"))
+            if (CurrentTest.test != null)
             {
                 string topic = "";
                 string header = "";
@@ -40,7 +40,7 @@ namespace Notest
             }
             else
             {
-                MessageBox.Show("Тест не выбран!");
+                MessageBox.Show("No test selected!");
                 UserWindow user = new UserWindow();
                 user.Show();
                 Close();
@@ -66,10 +66,11 @@ namespace Notest
                     }
                 }
                 Class.CurrentUser.user = user;
-                MessageBox.Show("Вы зашли под логином " + user.Login);
+                MessageBox.Show("You came by username " + user.Login);
             }
         }
 
+        // завершение теста: подсчёт результатов
         private void OnFinishTest(object sender, RoutedEventArgs e)
         {
             try
@@ -127,7 +128,7 @@ namespace Notest
                         }
                     }
                 }
-                MessageBox.Show("Поздравляем, ваш результат - " + result + "\n Максимальный результат - " + maxResult + "\n");
+                MessageBox.Show("Congratulations, your result is " + result + "\n Max result is " + maxResult + "\n");
                 using (Context db = new Context())
                 {
                     CompletedTest completedTest = new CompletedTest
@@ -143,7 +144,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Неожиданная ошибка. Позовите программиста");
+                MessageBox.Show("Unexpected error. Call the programmer");
                 Close();
             }
         }
@@ -158,6 +159,7 @@ namespace Notest
             return (int)Math.Round(resultMark);
         }
         
+        // заполнение теста
         private void FillTest(Context db)
         {
             int counter = 1;
@@ -226,7 +228,7 @@ namespace Notest
             }
             Button finishButton = new Button
             {
-                Content = "Завершить тест"
+                Content = "Finish test"
             };
             finishButton.Click += OnFinishTest;
             SelectedTest.Children.Add(finishButton);
@@ -249,11 +251,38 @@ namespace Notest
             }
         }
 
+        // завершение теста: выход из окна
         private void FinishHim()
         {
             UserWindow userWindow = new UserWindow();
             userWindow.Show();
             Close();
         }
+
+        #region кнопки для окна
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void HideWindow_Click(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.MinimizeWindow(this);
+        }
+
+        private void Fullscreen_Click(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.MaximizeWindow(this);
+            Fullscreen.Visibility = Visibility.Hidden;
+            FullscreenExit.Visibility = Visibility.Visible;
+        }
+
+        private void FullscreenExit_Click(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.RestoreWindow(this);
+            FullscreenExit.Visibility = Visibility.Hidden;
+            Fullscreen.Visibility = Visibility.Visible;
+        }
+        #endregion
     }
 }
