@@ -16,7 +16,8 @@
             <Button Width="43" Height="Auto"
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}" 
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource CloseButton}" 
                         Click="CloseWindow_Click">
                 <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -38,9 +39,9 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Topic}"
-                                    Header="Topic" />
+                                    Header="{DynamicResource topic}" />
                     <GridViewColumn DisplayMemberBinding="{Binding Header}"
-                                    Header="Header" />
+                                    Header="{DynamicResource header}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -50,7 +51,7 @@
             VerticalAlignment="Bottom"
                 Margin="25"
                 Foreground="#e3e0de"
-                Content="Select" 
+                Content="{DynamicResource select}" 
                 FontSize="10"                
                 Click="FindTestButton_Click"/>
     </Grid>

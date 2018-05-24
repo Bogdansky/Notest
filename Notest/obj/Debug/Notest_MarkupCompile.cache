@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\User\Desktop\Notest\Notest\App.xaml
-10-735300811
+26-883896699
 
 20-2064141225
 24-945476611
-Creator\AddQuestions.xaml;Creator\CreaterWindow.xaml;Creator\FindTest_Dialog.xaml;MainWindow.xaml;Creator\NewTest_Dialog.xaml;Creator\UserControl\QuestionChange.xaml;User\ChooseTest.xaml;User\MyResults.xaml;User\TestResults.xaml;User\UserWindow.xaml;
+Creator\AddQuestions.xaml;Creator\CreaterWindow.xaml;Creator\FindTest_Dialog.xaml;Languages\English\CreaterWindowLang.xaml;Languages\English\FindTestLang.xaml;Languages\English\MainWindowLang.xaml;Languages\English\NewTestLang.xaml;Languages\English\QuestionChangeLang.xaml;Languages\English\TestResultsLang.xaml;Languages\English\UserWindowLang.xaml;Languages\Russian\CreaterWindowLang.xaml;Languages\Russian\FindTestLang.xaml;Languages\Russian\MainWindowLang.xaml;Languages\Russian\NewTestLang.xaml;Languages\Russian\QuestionChangeLang.xaml;Languages\Russian\TestResultsLang.xaml;Languages\Russian\UserWindowLang.xaml;MainWindow.xaml;Creator\NewTest_Dialog.xaml;Creator\UserControl\QuestionChange.xaml;Styles\CloseButton.xaml;Styles\JustButton.xaml;User\ChooseTest.xaml;User\MyResults.xaml;User\TestResults.xaml;User\UserWindow.xaml;
 
 False
 

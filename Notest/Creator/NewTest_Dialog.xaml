@@ -17,6 +17,7 @@
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}" 
+                        Style="{StaticResource CloseButton}"
                         Click="CloseWindow_Click">
                 <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -26,7 +27,7 @@
             </Button>
         </Grid>
         <StackPanel Width="150" Margin="0 30 0 0">
-            <TextBlock Text="Test topic"  
+            <TextBlock Text="{DynamicResource tTopic}"  
                    FontSize="14"
                    FontWeight="Bold"
                    Foreground="#373940"

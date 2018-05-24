@@ -12,7 +12,7 @@
                              Margin="0,5,0,0"
                              Background="#373940"
                              Foreground="#e3e0de">
-            <TextBlock Text="Question"
+            <TextBlock Text="{DynamicResource quest}"
                        FontSize="16"
                        Margin="10 0 0 0"/>
         </materialDesign:Card>
@@ -30,7 +30,7 @@
                              Background="#373940"
                              Foreground="#e3e0de">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Weight"
+                <TextBlock Text="{DynamicResource weight}"
                            FontSize="14" 
                            VerticalAlignment="Center"
                            Margin="20,0,0,0"/>
@@ -47,7 +47,7 @@
                          VerticalAlignment="Top"
                          Click="AddImage_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Add Image"
+                        <TextBlock Text="{DynamicResource addImage}"
                                    FontSize="14"
                                    Foreground="#e3e0de"
                                    VerticalAlignment="Center"
@@ -66,7 +66,7 @@
                          Margin="70,0,0,0"
                          Click="DeleteImage_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Delete Image"
+                        <TextBlock Text="{DynamicResource delImage}"
                                    Foreground="#e3e0de"
                                    FontSize="14"
                                    VerticalAlignment="Center" />
@@ -82,7 +82,7 @@
             <StackPanel>
                 <materialDesign:Card Width="450" Height="40" Background="#373940"
                              Foreground="#e3e0de" HorizontalAlignment="Left" Margin="13,10,0,0">
-                    <TextBlock Text="Answer"
+                    <TextBlock Text="{DynamicResource answ}"
                                Background="#373940"
                                Foreground="#e3e0de"
                                Margin="10 0 0 0"
@@ -103,7 +103,7 @@
                             </DataGridCheckBoxColumn>
                             <materialDesign:MaterialDataGridTextColumn  Width="360"
                                                                         Binding="{Binding Path=Answer1}"
-                                                                        Header="Answer"
+                                                                        Header="{DynamicResource answ}"
                                                                         EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
                             </materialDesign:MaterialDataGridTextColumn>
                         </DataGrid.Columns>
@@ -112,7 +112,7 @@
             </StackPanel>
             <StackPanel Margin="15 0 0 0" Width="160">
                 <Button Width="70" Height="45"
-                        ToolTip="Remove Question"
+                        ToolTip="{DynamicResource delQuest}"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
                         Margin="0,100,80,0"
@@ -139,14 +139,14 @@
                         Foreground="#e3e0de"
                         Margin="0 15 0 0"
                         FontSize="11"
-                        Content="Save Changes"/>
+                        Content="{DynamicResource saveChange}"/>
                 <Button Name="Clear"
                         Background="#373940"
                         Foreground="#e3e0de"
                         Width="120"
                         Margin="0 15 0 0"
                         FontSize="11"
-                        Content="Clear Workspace"/>
+                        Content="{DynamicResource clearWork}"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

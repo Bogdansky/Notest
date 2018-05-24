@@ -31,6 +31,7 @@
                         Margin="0 0 80 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"
                         Click="HideWindow_Click">
 
                     <Image Source="..\ico\minimize.png"
@@ -44,7 +45,8 @@
                         HorizontalAlignment="Right"
                         Margin="0 0 40 0"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"                        
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"                        
                         Click="Fullscreen_Click">
                     <materialDesign:PackIcon Kind="Fullscreen"
                                              Width="25" Height="20"
@@ -56,7 +58,8 @@
                         Margin="0 0 40 0"
                         Visibility="Hidden"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"                        
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"                        
                         Click="FullscreenExit_Click">
                     <materialDesign:PackIcon Kind="FullscreenExit"
                                              Width="25" Height="20"
@@ -66,6 +69,7 @@
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}" 
+                        Style="{StaticResource CloseButton}"
                         Click="CloseWindow_Click">
                     <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -88,14 +92,7 @@
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
                         ToolTip="Выход"
-                        Margin="500 0 15 0"
-                        Click="GoOut">
-                    <Image Source="../ico/door.ico"
-                           Width="65" Height="45"
-                           VerticalAlignment="Center"
-                           MouseEnter="OnMouseOver"
-                           MouseLeave="OnMouseLeave"/>
-                </Button>
+                        Margin="500 0 15 0"/>
             </StackPanel>
             <DataGrid Grid.Row="2"
                       ColumnWidth="*"
@@ -108,15 +105,14 @@
                       HorizontalScrollBarVisibility="Auto"
                       IsReadOnly="True" 
                       SelectionMode="Single"
-                      FrozenColumnCount="5"
-                      Margin="0,0,-0.8,-0.4"
+                      Margin="0,0,-0.8,-0.4" 
                       Grid.ColumnSpan="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="40" Binding="{Binding Id}" Header="ID"/>
-                    <DataGridTextColumn Width="85" Binding="{Binding UserLogin}" Header="Логин"/>
-                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="Тема"/>
-                    <DataGridTextColumn Binding="{Binding TestName}" Header="Название"/>
-                    <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="Результат"/>
+                    <DataGridTextColumn Width="85" Binding="{Binding UserLogin}" Header="{DynamicResource login}"/>
+                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="{DynamicResource topic}"/>
+                    <DataGridTextColumn Binding="{Binding TestName}" Header="{DynamicResource header}"/>
+                    <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="{DynamicResource result}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

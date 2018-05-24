@@ -33,7 +33,6 @@ namespace Notest
                         var currentTest = db.Tests.Where(t => t.Id == test.TestId).First();
                         Class.Completed compl = new Class.Completed
                         {
-                            Id = 0,
                             UserLogin = "",
                             TestName = currentTest.Header,
                             TestTheme = currentTest.Topic,

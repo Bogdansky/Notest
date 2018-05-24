@@ -10,9 +10,9 @@
         <DataGrid Grid.Row="2" ColumnWidth="*" Name="ResultGrid" AutoGenerateColumns="False" VerticalScrollBarVisibility="Auto"
                   HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Margin="0,0,-0.8,-0.4" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding TestTheme}" Header="Topic"/>
-                <DataGridTextColumn Binding="{Binding TestName}" Header="Header"/>
-                <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="Result"/>
+                <DataGridTextColumn Binding="{Binding TestTheme}" Header="{DynamicResource topic}"/>
+                <DataGridTextColumn Binding="{Binding TestName}" Header="{DynamicResource header}"/>
+                <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="{DynamicResource result}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

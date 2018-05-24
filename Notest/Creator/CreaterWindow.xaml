@@ -33,6 +33,7 @@
                         Margin="0 0 80 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"
                         Click="HideWindow_Click">
 
                     <Image Source="..\ico\minimize.png"
@@ -46,7 +47,8 @@
                         HorizontalAlignment="Right"
                         Margin="0 0 40 0"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"                        
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"                        
                         Click="Fullscreen_Click">
                     <materialDesign:PackIcon Kind="Fullscreen"
                                              Width="25" Height="20"
@@ -58,7 +60,8 @@
                         Margin="0 0 40 0"
                         Visibility="Hidden"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"                        
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"                        
                         Click="FullscreenExit_Click">
                     <materialDesign:PackIcon Kind="FullscreenExit"
                                              Width="25" Height="20"
@@ -67,7 +70,8 @@
                 <Button Width="43" Height="Auto"
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}" 
+                        BorderBrush="{x:Null}"
+                        Style="{StaticResource CloseButton}" 
                         Click="CloseWindow_Click">
                     <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -109,14 +113,14 @@
                                Opacity="0.2"/>
                     <Button Name="NewTest"
                             Width="90" Height="55"
-                            ToolTip="Новый тест"
+                            ToolTip="{DynamicResource newTest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Bottom"
                             Click="NewTest_Click" >
                         <StackPanel>
-                            <TextBlock Text="New Test"
+                            <TextBlock Text="{DynamicResource newTest}"
                                Foreground="#e3e0de" />
                             <materialDesign:PackIcon Kind="ContentPaste"
                                                      Foreground="#e3e0de"
@@ -127,12 +131,12 @@
                     <Button Name="SaveTest"
                             Width="90" Height="60"
                             Margin="0 -7 0 0"
-                            ToolTip="Сохранить тест"
+                            ToolTip="{DynamicResource saveTest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"  
                             Click="SaveTest_Click" >
                         <StackPanel>
-                            <TextBlock Text="Save Test"
+                            <TextBlock Text="{DynamicResource saveTest}"
                                Foreground="#e3e0de"/>
                             <materialDesign:PackIcon Kind="ContentSaveOutline"
                                                  Foreground="#e3e0de"
@@ -143,13 +147,13 @@
 
                     <Button Name="OpenTest"
                             Width="95" Height="60"
-                            ToolTip="Открыть тест"
+                            ToolTip="{DynamicResource openTest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"  
                             Click="OpenTest_Click"
                             Margin="150,-7,0,0">
                         <StackPanel>
-                            <TextBlock Text="Open Test"
+                            <TextBlock Text="{DynamicResource openTest}"
                                        Foreground="#e3e0de"/>
                             <materialDesign:PackIcon Kind="FolderOutline"
                                                      Foreground="#e3e0de"
@@ -166,14 +170,14 @@
                                  Opacity="0.2"/>
                     <Button Name="AddQuestion"
                             Width="120" Height="60"
-                            ToolTip="Add Question"
+                            ToolTip="{DynamicResource addQuest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Click="AddQuestion_Click">
                         <StackPanel>
-                            <TextBlock Text="Add Question"
+                            <TextBlock Text="{DynamicResource addQuest}"
                                         Foreground="#e3e0de"
                                         Margin="0 5 0 0"/>
                             <materialDesign:PackIcon Kind="PlusOne"
@@ -184,14 +188,14 @@
 
                     </Button>
                     <Button Width="155" Height="60"
-                            ToolTip="Remove Question"
+                            ToolTip="{DynamicResource delQuest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Bottom"
                             Margin="85 0 0 0"
                             Click="RemoveQuestion_Click">
                         <StackPanel>
-                            <TextBlock Text="Delete Question"
+                            <TextBlock Text="{DynamicResource delQuest}"
                                VerticalAlignment="Top"
                                Foreground="#e3e0de"
                                Margin="20,5,0,0" />

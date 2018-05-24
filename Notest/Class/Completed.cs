@@ -8,7 +8,6 @@ namespace Notest.Class
 {
     class Completed
     {
-        public int Id { get; set; }
         public string UserLogin { get; set; }
         public string TestTheme { get; set; }
         public string TestName { get; set; }
@@ -16,7 +15,6 @@ namespace Notest.Class
 
         public Completed()
         {
-            Id = 0;
             UserLogin = "логин";
             TestTheme = "тема";
             TestName = "название";

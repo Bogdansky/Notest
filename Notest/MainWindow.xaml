@@ -21,6 +21,7 @@
                         Margin="0 0 40 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
+                        Style="{StaticResource JustButton}"
                         Click="HideWindow_Click">
 
                     <Image Source="ico\minimize.png"
@@ -33,6 +34,7 @@
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}" 
+                        Style="{StaticResource CloseButton}"
                         Click="CloseWindow_Click">
                     <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -64,11 +66,11 @@
                         Margin="20" />
                         <TextBlock TextAlignment="Center" 
                            FontSize="14"
-                           Text="You already have an account?"
+                           Text="{DynamicResource goodQuest}"
                            Foreground="AntiqueWhite"  />
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
-                           Text="Sign in to your account"
+                           Text="{DynamicResource prepareIn}"
                            Foreground="AntiqueWhite" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -78,7 +80,7 @@
                          Foreground="AntiqueWhite"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          MaxLength="15"
-                         materialDesign:HintAssist.Hint="Login"
+                         materialDesign:HintAssist.Hint="{DynamicResource login}"
                          TextAlignment="Center" />
                         <Image Name="Alert_Login"
                        Source="ico\alert.ico"
@@ -93,7 +95,7 @@
                              Foreground="AntiqueWhite"
                              Width="150"
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
-                             materialDesign:HintAssist.Hint="Password"                             
+                             materialDesign:HintAssist.Hint="{DynamicResource password}"                             
                              MaxLength="8"/>
                         <Image Name="Alert_Password"
                        Source="ico\alert.ico"
@@ -106,7 +108,7 @@
                      Foreground="#182d49"
                      Width="85"
                      Margin="80 20 0 0"
-                     Content="Login"/>
+                     Content="{DynamicResource signIn}"/>
                 </StackPanel>
                 <TextBlock Grid.Column="1"
                        Foreground="#f7f7e2"
@@ -121,11 +123,11 @@
                         Margin="10"/>
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
-                           Text="Do not have an account?"
+                           Text="{DynamicResource importantQuest}"
                            Foreground="AntiqueWhite"/>
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
-                           Text="Register now"
+                           Text="{DynamicResource regist}"
                            Foreground="AntiqueWhite"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"  >
@@ -135,7 +137,7 @@
                          Width="150"
                          MaxLength="15"
                          Foreground="AntiqueWhite"
-                         materialDesign:HintAssist.Hint="Login"
+                         materialDesign:HintAssist.Hint="{DynamicResource login}"
                          TextAlignment="Center"/>
                         <Image Name="Alert_NewLogin"
                        Source="ico\alert.ico"
@@ -149,7 +151,7 @@
                              MaxLength="8"
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                              Foreground="AntiqueWhite"
-                             materialDesign:HintAssist.Hint="Password"/>
+                             materialDesign:HintAssist.Hint="{DynamicResource password}"/>
                         <Image Name="Alert_NewPassword"
                        Source="ico\alert.ico"
                        Margin=" 0,30,0,0"
@@ -157,7 +159,7 @@
                        Visibility="Hidden"/>
                     </StackPanel>
                     <TextBlock FontSize="14"
-                       Text="User Type"
+                       Text="{DynamicResource useType}"
                        Foreground="AntiqueWhite"
                        TextAlignment="Center"
                        Margin="0 15 0 0"/>
@@ -168,15 +170,15 @@
                       HorizontalContentAlignment="Center" >
                         <ComboBoxItem IsSelected="True"
                           HorizontalAlignment="Center"
-                          Content="User"/>
+                          Content="{DynamicResource user}"/>
                         <ComboBoxItem HorizontalAlignment="Center"
-                          Content="Creator"/>
+                          Content="{DynamicResource creator}"/>
                     </ComboBox>
                     <Button Name="registrationButton"
-                    Width="85"
-                    Margin="80 20 0 0"
+                    Width="auto"
+                    Margin="70 20 10 0"
                     Click="OnRegisterButton_Click"
-                    Content="Register"
+                    Content="{DynamicResource regg}"
                     Foreground="#182d49" />
                 </StackPanel>
             </Grid>

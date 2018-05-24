@@ -149,6 +149,7 @@ namespace Notest
             }
         }
 
+        // подсчёт промежуточного результата
         private int Rate(int current, int total, int weight) // current - набранное количество правильных ответов | total - количество правильных ответов | weight - вес вопроса
         {
             if (total == 0) // если правильных ответов нет вообще
@@ -164,7 +165,8 @@ namespace Notest
         {
             int counter = 1;
             var questions = from question in db.Questions where question.Test_Id == CurrentTest.test.Id select question;
-            foreach (Question question in questions)
+            var randQuestions = GetShakedQuestions(questions.ToList());
+            foreach (Question question in randQuestions)
             {
                 Expander expander = new Expander
                 {
@@ -232,6 +234,26 @@ namespace Notest
             };
             finishButton.Click += OnFinishTest;
             SelectedTest.Children.Add(finishButton);
+        }
+
+        // получение списка случайно расположенных вопросов
+        private List<Question> GetShakedQuestions(List<Question> questions)
+        {
+            List<Question> shakedQuestions = new List<Question>();
+            List<int> indexList = new List<int>();
+            for(int i = 0; i < questions.Count; i++)
+            {
+                indexList.Add(i);
+            }
+            int randIndex = 0;
+            Random randomize = new Random();
+            for (int i = 0; i < questions.Count; i++)
+            {
+                randIndex = indexList.Count > 1 ? randomize.Next(indexList.Count) : indexList.First();
+                shakedQuestions.Add(questions[randIndex]);
+                indexList.Remove(randIndex);
+            }
+            return shakedQuestions;
         }
 
         // чтобы открывался только один Expander
