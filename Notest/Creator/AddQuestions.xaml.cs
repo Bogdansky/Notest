@@ -37,9 +37,9 @@ namespace Notest
                 }
                 QuestionList.ItemsSource = questionList;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+
             }
             #endregion
         }
@@ -73,9 +73,9 @@ namespace Notest
                 }
                 DialogResult = true;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("The question can not be added", "", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -95,9 +95,9 @@ namespace Notest
                     selectedQuestions.Remove(item as Question);
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+
             }
         }
 

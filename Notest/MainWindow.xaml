@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Notest"
         mc:Ignorable="d"          
         Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"       
         WindowStyle="None" AllowsTransparency="True"
         Icon ="ico\main.ico"
         Title="Notest" >
@@ -67,11 +68,11 @@
                         <TextBlock TextAlignment="Center" 
                            FontSize="14"
                            Text="{DynamicResource goodQuest}"
-                           Foreground="AntiqueWhite"  />
+                           Foreground="#f9f9fb"  />
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
                            Text="{DynamicResource prepareIn}"
-                           Foreground="AntiqueWhite" />
+                           Foreground="#f9f9fb" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBox Name="Login"
@@ -105,17 +106,20 @@
                     </StackPanel>
                     <Button  Name="LoginButton"
                      Click="LoginButton_Click"
-                     Foreground="#182d49"
+                     Foreground="#f9f9fb"
                      Width="85"
                      Margin="80 20 0 0"
                      Content="{DynamicResource signIn}"/>
+
                 </StackPanel>
-                <TextBlock Grid.Column="1"
-                       Foreground="#f7f7e2"
-                       Text="Or"
-                       FontSize="40"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="center"/>
+                <Menu Name="Languages" Grid.ColumnSpan="2" Margin="351,204,0,183" Width="100.8" Height="72.8" Background="{x:Null}" >
+                    <MenuItem Name="Русский" Click="OnLanguageChange">
+
+                    </MenuItem>
+                    <MenuItem Name="English" Click="OnLanguageChange">
+
+                    </MenuItem>
+                </Menu>
                 <StackPanel Grid.Column="2" Width="250" Height="400">
                     <StackPanel  Margin="0 20 0 0"  Orientation="Vertical">
                         <Image  Source="ico\add.ico"
@@ -124,14 +128,15 @@
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
                            Text="{DynamicResource importantQuest}"
-                           Foreground="AntiqueWhite"/>
+                           Foreground="#f9f9fb"/>
                         <TextBlock TextAlignment="Center"
                            FontSize="14"
                            Text="{DynamicResource regist}"
-                           Foreground="AntiqueWhite"/>
+                           Foreground="#f9f9fb"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"  >
                         <TextBox Name="NewLogin"
+                         ToolTip="{DynamicResource onlyNumLat}"
                          Margin="50 20 0 0"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                          Width="150"
@@ -147,6 +152,7 @@
                     </StackPanel>
                     <StackPanel Margin="50 0 0 0"  Orientation="Horizontal" >
                         <PasswordBox Name="NewPassword"
+                                      ToolTip="{DynamicResource onlyNumLat}"
                              Width="150"
                              MaxLength="8"
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
@@ -160,13 +166,13 @@
                     </StackPanel>
                     <TextBlock FontSize="14"
                        Text="{DynamicResource useType}"
-                       Foreground="AntiqueWhite"
+                       Foreground="#f9f9fb"
                        TextAlignment="Center"
                        Margin="0 15 0 0"/>
                     <ComboBox Name="UserType"
                       Width="150"
                       Margin="0 5 0 0"
-                      Foreground="AntiqueWhite"
+                      Foreground="#f9f9fb"
                       HorizontalContentAlignment="Center" >
                         <ComboBoxItem IsSelected="True"
                           HorizontalAlignment="Center"
@@ -175,11 +181,10 @@
                           Content="{DynamicResource creator}"/>
                     </ComboBox>
                     <Button Name="registrationButton"
-                    Width="auto"
-                    Margin="70 20 10 0"
+                    Margin="50,40,29.6,0"
                     Click="OnRegisterButton_Click"
                     Content="{DynamicResource regg}"
-                    Foreground="#182d49" />
+                    Foreground="#f9f9fb" />
                 </StackPanel>
             </Grid>
         </Grid>

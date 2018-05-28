@@ -41,13 +41,13 @@ namespace Notest
                     }
                     else
                     {
-                        MessageBox.Show("Тест уже существует");
+                        MessageBox.Show((string)Application.Current.Resources["testEx"], "", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
                 else
                 {
                     DialogResult = false;
-                    MessageBox.Show("Введите данные!");
+                    MessageBox.Show((string)Application.Current.Resources["input"], "", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
             catch (Exception ex)

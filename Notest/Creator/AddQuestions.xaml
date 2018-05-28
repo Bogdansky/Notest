@@ -16,7 +16,7 @@
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="#373940">
+        <Grid Grid.Row="0" Background="#535e66">
             <Button Width="43" Height="Auto"
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
@@ -30,44 +30,59 @@
                                              />
             </Button>
         </Grid>
-        <ItemsControl Name="QuestionList">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border x:Name="Border" Padding="8"
+        <Viewbox Stretch="Uniform">
+            <ItemsControl Name="QuestionList" Grid.Row="1">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="Border" Padding="8"
                             BorderThickness="0 0 0 1"
                             BorderBrush="{DynamicResource MaterialDesignDivider}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"
                                     SharedSizeGroup="Checkerz" />
-                                <ColumnDefinition  Width="190"/>
-                            </Grid.ColumnDefinitions>
-                            <ToggleButton VerticalAlignment="Center" IsChecked="{Binding IsSelected}"
+                                    <ColumnDefinition  Width="190"/>
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton VerticalAlignment="Center" IsChecked="{Binding IsSelected}"
                                                   Style="{StaticResource MaterialDesignActionLightToggleButton}"
                                                   Content="{Binding Code}"
                                                   Tag="{Binding}"
                                                   Checked="ToggleButton_Checked"/>
-                            <StackPanel Margin="8 0 0 0" Grid.Column="1">
-                                <TextBlock FontWeight="Bold"
+                                <StackPanel Margin="8 0 0 0" Grid.Column="1">
+                                    <TextBlock FontWeight="Bold"
                                             Tag="{Binding}"
                                            TextWrapping="Wrap"
                                            Text="{Binding Question1}" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Button Name="FindTestButton"
-                Width="70" Height="25"
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Border>
+
+                        <DataTemplate.Triggers>
+
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+
+                                <Setter TargetName="Border" Property="Background" Value="{DynamicResource MaterialDesignSelection}" />
+
+                            </DataTrigger>
+
+                        </DataTemplate.Triggers>
+
+                    </DataTemplate>
+
+                </ItemsControl.ItemTemplate>
+
+            </ItemsControl>
+
+        </Viewbox>
+
+        <Button Grid.Row="1" Name="FindTestButton"
+                Width="74" Height="25"
+                Background="#535e66"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-                Margin="25"
+                Margin="0,0,25,25"
                 Foreground="#e3e0de"
                 Content="{DynamicResource select}" 
                 FontSize="10"

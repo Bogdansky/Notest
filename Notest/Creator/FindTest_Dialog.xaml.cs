@@ -41,15 +41,14 @@ namespace Notest
                 }
                 else
                 {
-                    MessageBox.Show("No test selected");
+                    MessageBox.Show((string)Application.Current.Resources["noselectTest"]);
                     DialogResult = false;
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 DialogResult = false;
-                MessageBox.Show(ex.Message);
             }
         }
         #region кнопки для окна

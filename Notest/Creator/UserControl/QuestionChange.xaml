@@ -6,52 +6,54 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Notest"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
-    <StackPanel  Width="650" >
-        <materialDesign:Card Width="600" Height="35"
+             d:DesignHeight="500" d:DesignWidth="800"
+             Margin="50 0 0 0">
+    <StackPanel>
+        <materialDesign:Card Width="800" Height="35"
                              Margin="0,5,0,0"
                              Background="#373940"
                              Foreground="#e3e0de">
-            <TextBlock Text="{DynamicResource quest}"
+            <TextBlock Text="Question"
                        FontSize="16"
                        Margin="10 0 0 0"/>
         </materialDesign:Card>
-        <StackPanel Orientation="Horizontal" Width="600">
+        <StackPanel Orientation="Horizontal" Width="800">
             <RichTextBox  Name="questionText"
-                          Width="440" Height="100"
+                          Width="600" Height="120"
+                          FontSize="16"    
                           Foreground="#373940"
                           Background="#e3e0de"/>
             <Grid Background="#e3e0de" >
                 <Image Name="PictureBox"                       
-                       Width="160" Height="100"/>
+                       Width="200" Height="120"/>
             </Grid>
         </StackPanel>
-        <materialDesign:Card Width="600" Height="40"
+        <materialDesign:Card Width="800" Height="40"
                              Background="#373940"
                              Foreground="#e3e0de">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{DynamicResource weight}"
+                <TextBlock Text="Weight"
                            FontSize="14" 
                            VerticalAlignment="Center"
-                           Margin="20,0,0,0"/>
+                           Margin="25,0,0,0"/>
                 <TextBox Name="questionCosttxb"
-                         Width="80" Height="30"
+                         Width="50" Height="30"
                          FontSize="16"
                          Text="1"
                          Margin="20,0,0,0"
                          TextChanged="OnQuestionCostChanged"/>
                 <Button  x:Name="AddImage"
-                         Height="40"
+                         Height="40" Width="130"
+                         Margin="150 0 0 0"
                          Background="{x:Null}"
                          BorderBrush="{x:Null}"
                          VerticalAlignment="Top"
                          Click="AddImage_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource addImage}"
+                        <TextBlock Text="Add Image"
                                    FontSize="14"
                                    Foreground="#e3e0de"
-                                   VerticalAlignment="Center"
-                                   Margin="40,0,0,0"/>
+                                   VerticalAlignment="Center"/>
                         <materialDesign:PackIcon Kind="ImagePlus"
                                                  Foreground="#e3e0de"
                                                  Width="30" Height="26"
@@ -59,14 +61,14 @@
                     </StackPanel>
                 </Button>
                 <Button  x:Name="DeleteImage"
-                         Height="40"
+                         Height="40" Width="150"
                          Background="{x:Null}"
                          BorderBrush="{x:Null}"
                          VerticalAlignment="Top"
-                         Margin="70,0,0,0"
+                         Margin="100,0,0,0"
                          Click="DeleteImage_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource delImage}"
+                        <TextBlock Text="Delete Image"
                                    Foreground="#e3e0de"
                                    FontSize="14"
                                    VerticalAlignment="Center" />
@@ -80,49 +82,52 @@
         </materialDesign:Card>
         <StackPanel Orientation="Horizontal">
             <StackPanel>
-                <materialDesign:Card Width="450" Height="40" Background="#373940"
-                             Foreground="#e3e0de" HorizontalAlignment="Left" Margin="13,10,0,0">
-                    <TextBlock Text="{DynamicResource answ}"
+                <materialDesign:Card Width="600" Height="40"
+                                     Background="#373940"
+                                     Foreground="#e3e0de"
+                                     Margin="0,10,0,0">
+                    <TextBlock Text="Answer"
+                               Margin="10 0 0 0"
                                Background="#373940"
                                Foreground="#e3e0de"
-                               Margin="10 0 0 0"
                                FontSize="16"/>
-                </materialDesign:Card >
-                <materialDesign:Card Width="450" Height="250" HorizontalAlignment="Left"  Margin="13,0,0,0">
+                </materialDesign:Card>
+                <materialDesign:Card Width="600" Height="230">
+
                     <DataGrid    x:Name="AnswerDtgrd"
                                  Foreground="#373940"
-                                 Background="#e3e0de"                              
+                                 Background="#e3e0de"
+                                 Margin="0 0 0 0"
                                  AutoGenerateColumns="False"
                                  materialDesign:DataGridAssist.CellPadding="13 8 8 8"
                                  materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                         <DataGrid.Columns>
-                            <DataGridCheckBoxColumn Binding="{Binding Path=IsRight}"
-                                                    Width="70"
+                            <DataGridCheckBoxColumn Binding="{Binding IsRight}"
+                                                    Width="100"
                                                     ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}" Header="Right">
-                            </DataGridCheckBoxColumn>
-                            <materialDesign:MaterialDataGridTextColumn  Width="360"
-                                                                        Binding="{Binding Path=Answer1}"
-                                                                        Header="{DynamicResource answ}"
-                                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}">
-                            </materialDesign:MaterialDataGridTextColumn>
+                                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}" Header="Right"/>
+                            <materialDesign:MaterialDataGridTextColumn  Width="400"
+                                                                        Binding="{Binding Answer1}"
+                                                                        Header="Answer"
+                                                                        FontSize="16"
+                                                                        EditingElementStyle="{StaticResource MaterialDesignDataGridTextColumnEditingStyle}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </materialDesign:Card>
             </StackPanel>
-            <StackPanel Margin="15 0 0 0" Width="160">
+            <StackPanel  Width="200">
                 <Button Width="70" Height="45"
-                        ToolTip="{DynamicResource delQuest}"
+                        ToolTip="Add Answer"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
-                        Margin="0,100,80,0"
+                        Margin="0,80,80,0"
                         Click="AddAnswer_Click">
                     <materialDesign:PackIcon Kind="Plus"
                                              Foreground="#e3e0de"
                                               Width="30" Height="35"
                                               Margin="5,6,0,0"/>
                 </Button>
-                <Button  Name="RemoveAnswer"
+                <Button  x:Name="RemoveAnswer"
                          Width="70" Height="45"
                          ToolTip="Remove Answer"                         
                          Background="{x:Null}"
@@ -133,20 +138,20 @@
                                              Width="30" Height="35"
                                              Margin="5,6,0,0"/>
                 </Button>
-                <Button Name="SaveChanges"
-                        Width="120"
+                <Button x:Name="SaveChanges"
+                        Width="150"
                         Background="#373940"
                         Foreground="#e3e0de"
                         Margin="0 15 0 0"
-                        FontSize="11"
-                        Content="{DynamicResource saveChange}"/>
-                <Button Name="Clear"
+                        FontSize="14"
+                        Content="Save Changes"/>
+                <Button x:Name="Clear"
                         Background="#373940"
                         Foreground="#e3e0de"
-                        Width="120"
+                        Width="150"
                         Margin="0 15 0 0"
-                        FontSize="11"
-                        Content="{DynamicResource clearWork}"/>
+                        FontSize="14"
+                        Content="Clear Workspace"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

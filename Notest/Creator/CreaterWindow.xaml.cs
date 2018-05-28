@@ -23,7 +23,7 @@ namespace Notest
     /// </summary>
     public partial class CreaterWindow : Window
     {
-        QuestionChange questionChangePanel = new QuestionChange();
+        QuestionChange questionChangePanel = new QuestionChange { HorizontalAlignment = HorizontalAlignment.Right};
         Context db = new Context();
         List<Answer> answerList = new List<Answer>();
 
@@ -85,7 +85,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Update error");
+                MessageBox.Show((string)Application.Current.Resources["upError"]);
             }
         }
 
@@ -127,11 +127,12 @@ namespace Notest
                     questionChangePanel.IsEnabled = true;
 
                     CurrentTest.test.Author = UserLogin.Text;
+                    PrintTest.IsEnabled = true;
                 }
             }
             catch
             {
-                MessageBox.Show("It is not possible to create", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["createImpo"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -140,26 +141,58 @@ namespace Notest
         {
             try
             {
-                if (Validation.IsTestExist(CurrentTest.test.Topic, CurrentTest.test.Header) == false)
+                if (CurrentTest.test.Questions.Count != 0)
                 {
-                    db.Tests.Add(CurrentTest.test);
-                    db.SaveChanges();
-                    CurrentTest.test.Id = db.Tests.FirstOrDefault(t => (t.Header == CurrentTest.test.Header) && (t.Topic == CurrentTest.test.Topic)).Id;
-
-                    foreach (Question q in CurrentTest.test.Questions)
+                    if (Validation.IsTestExist(CurrentTest.test.Topic, CurrentTest.test.Header) == false)
                     {
-                        q.Test_Id = CurrentTest.test.Id;
-                        db.Questions.Add(q);
+                        db.Tests.Add(CurrentTest.test);
                         db.SaveChanges();
-                        q.Id = db.Questions.FirstOrDefault(dbQ => (dbQ.Question1 == q.Question1) && (dbQ.Test_Id == q.Test_Id)).Id;
+                        CurrentTest.test.Id = db.Tests.FirstOrDefault(t => (t.Header == CurrentTest.test.Header) && (t.Topic == CurrentTest.test.Topic)).Id;
 
-                        foreach (Answer a in q.Answers)
+                        foreach (Question q in CurrentTest.test.Questions)
                         {
-                            a.Question_Id = q.Id;
-                            db.Answers.Add(a);
+                            q.Test_Id = CurrentTest.test.Id;
+                            db.Questions.Add(q);
                             db.SaveChanges();
+                            q.Id = db.Questions.FirstOrDefault(dbQ => (dbQ.Question1 == q.Question1) && (dbQ.Test_Id == q.Test_Id)).Id;
+
+                            foreach (Answer a in q.Answers)
+                            {
+                                a.Question_Id = q.Id;
+                                db.Answers.Add(a);
+                                db.SaveChanges();
+                            }
                         }
                     }
+                    else //если работаем с существующим тестом
+                    {
+                        List<Question> questions = Question.ChangeFromDb(db.Questions.Where(q => q.Test_Id == CurrentTest.test.Id));
+
+                        foreach (Question question in questions)
+                        {
+                            db.Answers.RemoveRange(db.Answers.Where(a => a.Question_Id == question.Id));
+                            db.SaveChanges();
+                        }
+
+                        db.Questions.RemoveRange(db.Questions.Where(q => q.Test_Id == CurrentTest.test.Id));
+
+                        foreach (Question q in CurrentTest.test.Questions)
+                        {
+                            q.Test_Id = CurrentTest.test.Id;
+                            db.Questions.Add(q);
+                            db.SaveChanges();
+                            q.Id = db.Questions.FirstOrDefault(dbQ => (dbQ.Question1 == q.Question1) && (dbQ.Test_Id == q.Test_Id)).Id;
+
+                            foreach (Answer a in q.Answers)
+                            {
+                                a.Question_Id = q.Id;
+                                db.Answers.Add(a);
+                                db.SaveChanges();
+                            }
+
+                        }
+                    }
+                    MessageBox.Show("Test saved", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                 }
                 else //если работаем с существующим тестом
                 {
@@ -189,11 +222,11 @@ namespace Notest
 
                     }
                 }
-                MessageBox.Show("Test saved", "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                MessageBox.Show((string)Application.Current.Resources["saveTest"], "", MessageBoxButton.OK, MessageBoxImage.Asterisk);
             }
             catch
             {
-                MessageBox.Show("It is not possible to save", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["saveImpo"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -213,6 +246,8 @@ namespace Notest
                     QuestionTools.Visibility = Visibility;
                     AddQuestionFromDb.Visibility = Visibility;
                     questionChangePanel.IsEnabled = true;
+                    SaveTest.IsEnabled = true;
+                    PrintTest.IsEnabled = true;
 
                     //добавление названия теста
                     NameTest.Text = CurrentTest.test.Header;
@@ -229,10 +264,24 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Open error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["openError"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        //сохранить тест в ворд
+        private void PrintTest_Click(object sender, RoutedEventArgs e)
+        {
+            if (CurrentTest.test.Questions.Count != 0)
+            {
+                CurrentTest.Print();
+            }
+            else
+            {
+                MessageBox.Show("There is nothing to save", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+            
         //добавить вопрос
         private void AddQuestion_Click(object sender, RoutedEventArgs e)
         {
@@ -240,41 +289,60 @@ namespace Notest
             {
                 //добавляем вопрос
                 TextRange range = new TextRange(questionChangePanel.questionText.Document.ContentStart, questionChangePanel.questionText.Document.ContentEnd);
-                question_ListBox.Items.Insert(countQuestion, countQuestion.ToString() + ". " + range.Text);
-
-                Question question = new Question
+                if (range.IsEmpty == false)
                 {
-                    Question1 = range.Text
-                };
+                    question_ListBox.Items.Insert(countQuestion, (countQuestion + 1).ToString() + ". " + range.Text);
 
-                if (questionChangePanel.questionCosttxb.BorderBrush != new SolidColorBrush(Colors.IndianRed))
-                {
-                    question.Cost = Convert.ToInt32(questionChangePanel.questionCosttxb.Text);
+                    Question question = new Question
+                    {
+                        Question1 = range.Text
+                    };
+
+                    if (questionChangePanel.questionCosttxb.BorderBrush != new SolidColorBrush(Colors.IndianRed))
+                    {
+                        question.Cost = Convert.ToInt32(questionChangePanel.questionCosttxb.Text);
+                    }
+                    else
+                    {
+                        questionChangePanel.questionCosttxb.Text = "1";
+                        question.Cost = 1;
+                    }
+
+                    if (questionChangePanel.PictureBox.Source != null)
+                    {
+                        question.Image = questionChangePanel.PictureBox.Source.ToString();
+                    }
+
+                    //варианты ответов
+                    answerList.AddRange((List<Answer>)questionChangePanel.AnswerDtgrd.ItemsSource);
+                    answerList.RemoveRange(answerList.Count / 2, answerList.Count / 2);
+                    question.Answers.AddRange(answerList);
+
+                    bool flag = false;
+                    foreach (Question q in CurrentTest.test.Questions)
+                    {
+                        if (question.Question1 == q.Question1)
+                        {
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        CurrentTest.test.Questions.Add(question);
+                        countQuestion += 1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Question already exists", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
-                else
-                {
-                    questionChangePanel.questionCosttxb.Text = "1";
-                    question.Cost = 1;
-                }
-
-                if (questionChangePanel.PictureBox.Source != null)
-                {
-                    question.Image = questionChangePanel.PictureBox.Source.ToString();
-                }
-
-                //варианты ответов
-                answerList.AddRange((List<Answer>)questionChangePanel.AnswerDtgrd.ItemsSource);
-                answerList.RemoveRange(answerList.Count / 2, answerList.Count / 2);
-                question.Answers.AddRange(answerList);
-
-                CurrentTest.test.Questions.Add(question);
-                countQuestion += 1;
 
                 CleanWindow();
             }
             catch
             {
-                MessageBox.Show("Add question error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["addQuestError"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -290,7 +358,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Add question error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["addQuestError"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -299,7 +367,7 @@ namespace Notest
         {
             try
             {
-                MessageBoxResult result = MessageBox.Show("Are you shure?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                MessageBoxResult result = MessageBox.Show((string)Application.Current.Resources["sure"], "", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.OK)
                 {
                     string selectedQuestion = question_ListBox.SelectedItem.ToString().Remove(0, question_ListBox.SelectedItem.ToString().IndexOf('.') + 2);
@@ -324,7 +392,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Delete question error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["delQuestError"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -402,12 +470,12 @@ namespace Notest
                             break;
                         }
                     }
-                    MessageBox.Show("Changes saved", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show((string)Application.Current.Resources["saveChanges"], "", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch
             {
-                MessageBox.Show("Save changes error", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["saveError"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -436,7 +504,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Сan not be removed", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["muteRemove"], "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -446,12 +514,17 @@ namespace Notest
             try
             {
                 MainWindow startWindow = new MainWindow();
-                Close();
-                startWindow.Show();
+                MessageBoxResult dialogResult = MessageBox.Show((string)Application.Current.Resources["hi"], "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (dialogResult == MessageBoxResult.Yes)
+                {
+                    CurrentTest.test = null;
+                    Close();
+                    startWindow.Show();
+                }
             }
             catch
             {
-                MessageBox.Show("Невозможно выйти");
+
             }
         }
         private void OnMouseOver(object sender, MouseEventArgs e)

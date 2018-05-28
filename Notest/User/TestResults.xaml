@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Notest"
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True"
-        Title="Notest" Height="325" Width="600" Icon ="../ico/main.ico">
+        Title="Notest" Height="350" Width="620" Icon ="../ico/main.ico">
     <Window.Resources>
         <Style x:Key="ds" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -31,7 +31,6 @@
                         Margin="0 0 80 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"
                         Click="HideWindow_Click">
 
                     <Image Source="..\ico\minimize.png"
@@ -45,8 +44,7 @@
                         HorizontalAlignment="Right"
                         Margin="0 0 40 0"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"                        
+                        BorderBrush="{x:Null}"                        
                         Click="Fullscreen_Click">
                     <materialDesign:PackIcon Kind="Fullscreen"
                                              Width="25" Height="20"
@@ -58,8 +56,7 @@
                         Margin="0 0 40 0"
                         Visibility="Hidden"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"                        
+                        BorderBrush="{x:Null}"                        
                         Click="FullscreenExit_Click">
                     <materialDesign:PackIcon Kind="FullscreenExit"
                                              Width="25" Height="20"
@@ -69,7 +66,6 @@
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}" 
-                        Style="{StaticResource CloseButton}"
                         Click="CloseWindow_Click">
                     <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -88,31 +84,28 @@
                            Width="140"
                            FontSize="20">
                 </TextBlock>
-                <Button Width="70" Height="50"
-                        Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        ToolTip="Выход"
-                        Margin="500 0 15 0"/>
             </StackPanel>
             <DataGrid Grid.Row="2"
+                      Width="780"
                       ColumnWidth="*"
                       Name="ResultGrid"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False" CanUserDeleteRows="False"
-                      AlternatingRowBackground="#a3a6af"
-                      
+                      AlternatingRowBackground="#a3a6af"                      
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto"
                       IsReadOnly="True" 
+                      FontWeight="Medium"
                       SelectionMode="Single"
-                      Margin="0,0,-0.8,-0.4" 
-                      Grid.ColumnSpan="2">
+                      FrozenColumnCount="5"
+                      Margin="0,0,-1,0" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="40" Binding="{Binding Id}" Header="ID"/>
-                    <DataGridTextColumn Width="85" Binding="{Binding UserLogin}" Header="{DynamicResource login}"/>
-                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="{DynamicResource topic}"/>
-                    <DataGridTextColumn Binding="{Binding TestName}" Header="{DynamicResource header}"/>
-                    <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="{DynamicResource result}"/>
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding UserLogin}"
+                                        Header="Логин"                                        />
+                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="Тема"/>
+                    <DataGridTextColumn Binding="{Binding TestName}" Header="Название"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding Result}" Header="Результат"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

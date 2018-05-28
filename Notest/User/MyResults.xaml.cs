@@ -45,7 +45,7 @@ namespace Notest
                 catch (NullReferenceException)
                 {
                     ResultGrid.ItemsSource = null;
-                    MessageBox.Show("You haven't results!");
+                    MessageBox.Show((string)Application.Current.Resources["havent"]);
                 }
             }
         }

@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Notest"
+        WindowStartupLocation="Manual" 
         mc:Ignorable="d"
-        Height="400" Width="300"   Icon="..\ico\main.ico"
+        Height="500" Width="400"   Icon="..\ico\main.ico"
         WindowStyle="None" AllowsTransparency="True">
     <Window.Background>
         <ImageBrush ImageSource="..\picture\6.jpg"/>
     </Window.Background>
     <Grid>
-        <Grid Height="25" VerticalAlignment="Top" Background="#373940">
+        <Grid Height="25" VerticalAlignment="Top" Background="#535e66">
             <Button Width="43" Height="Auto"
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource CloseButton}" 
+                        BorderBrush="{x:Null}" 
                         Click="CloseWindow_Click">
                 <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -28,30 +28,35 @@
         </Grid>
         <Rectangle
             Fill="#c3beba"
-            Width="250" Height="280"
+            Width="300" Height="350"
             VerticalAlignment="Center"              
             Margin="15"
             Opacity="0.7"/>
-        <ListView Name="AllTests"
+        <ScrollViewer 
+                  VerticalAlignment="Center"                   
+                  Height="350" Margin="50,75">
+            <ListView Name="AllTests"
                   HorizontalAlignment="Center"
-                  VerticalAlignment="Center"                  
-                  Height="280" Margin="64,60">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Topic}"
+                  VerticalAlignment="Center"                   
+                  Height="350" Width="300">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Topic}"
                                     Header="{DynamicResource topic}" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Header}"
+                        <GridViewColumn DisplayMemberBinding="{Binding Header}"
                                     Header="{DynamicResource header}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
         <Button Name="FindTestButton"
-                Width="70" Height="25"
+                Width="90" Height="35"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
                 Margin="25"
+                Background="#535e66"
                 Foreground="#e3e0de"
-                Content="{DynamicResource select}" 
+                Content="Select" 
                 FontSize="10"                
                 Click="FindTestButton_Click"/>
     </Grid>

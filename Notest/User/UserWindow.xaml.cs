@@ -144,7 +144,8 @@ namespace Notest
         private void OnChooseTest(object sender, RoutedEventArgs e)
         {
             var headerTest = Header.Content != null ? Header.Content : "\\_(^_^)_/";
-            var result = MessageBox.Show($"Do you want to select \"{headerTest}\"?", "Sure?", MessageBoxButton.YesNo);
+            var result = MessageBox.Show($"{(string)Application.Current.Resources["questSelect"]} \"{headerTest}\"?",
+                (string)Application.Current.Resources["sure"], MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 if ((string)Header.Content != null)
@@ -155,7 +156,7 @@ namespace Notest
                 }
                 else
                 {
-                    MessageBox.Show("Selected test isn't exist!");
+                    MessageBox.Show((string)Application.Current.Resources["noTest"]);
                     e.Handled = true;
                 }
             }
@@ -202,7 +203,7 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("It is impossible");
+                MessageBox.Show((string)Application.Current.Resources["impo"]);
             }
         }
 

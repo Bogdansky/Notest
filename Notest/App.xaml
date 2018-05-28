@@ -21,13 +21,15 @@
                 <ResourceDictionary Source="Languages/English/QuestionChangeLang.xaml"/>
                 <ResourceDictionary Source="Languages/English/TestResultsLang.xaml"/>
                 <ResourceDictionary Source="Languages/English/UserWindowLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/CreaterWindowLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/FindTestLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/MainWindowLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/NewTestLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/QuestionChangeLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/TestResultsLang.xaml"/>
-                <ResourceDictionary Source="Languages/Russian/UserWindowLang.xaml"/>
+                <ResourceDictionary Source="Languages/English/NotificationLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/CreaterWindowLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/FindTestLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/MainWindowLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/NewTestLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/QuestionChangeLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/TestResultsLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/UserWindowLang.xaml"/>
+                <ResourceDictionary Source="Languages/Русский/NotificationLang.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -3,4 +3,6 @@
                     xmlns:local="clr-namespace:Notest.Languages.English"
                     xmlns:lang="clr-namespace:System;assembly=mscorlib">
     <lang:String x:Key="tTopic">Test topic</lang:String>
+    <lang:String x:Key="tHeader">Test header</lang:String>
+    <lang:String x:Key="okey">Ok</lang:String>
 </ResourceDictionary>

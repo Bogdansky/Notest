@@ -6,8 +6,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Notest"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" 
+        ResizeMode="CanResize"
         Title="Notest" 
-        Height="525" Width="800"
+        Height="525" Width="850"
         Icon ="../ico/main.ico"
         WindowStyle="None" AllowsTransparency="True">
     <Window.Background>
@@ -27,13 +29,13 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="490"/>
             </Grid.RowDefinitions>
+
             <Grid Grid.Row="0" Background="#373940">
                 <Button Width="45" Height="Auto"
                         HorizontalAlignment="Right"
                         Margin="0 0 80 0"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"
                         Click="HideWindow_Click">
 
                     <Image Source="..\ico\minimize.png"
@@ -47,8 +49,7 @@
                         HorizontalAlignment="Right"
                         Margin="0 0 40 0"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"                        
+                        BorderBrush="{x:Null}"                        
                         Click="Fullscreen_Click">
                     <materialDesign:PackIcon Kind="Fullscreen"
                                              Width="25" Height="20"
@@ -60,8 +61,7 @@
                         Margin="0 0 40 0"
                         Visibility="Hidden"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource JustButton}"                        
+                        BorderBrush="{x:Null}"                        
                         Click="FullscreenExit_Click">
                     <materialDesign:PackIcon Kind="FullscreenExit"
                                              Width="25" Height="20"
@@ -70,8 +70,7 @@
                 <Button Width="43" Height="Auto"
                         HorizontalAlignment="Right"
                         Background="{x:Null}"
-                        BorderBrush="{x:Null}"
-                        Style="{StaticResource CloseButton}" 
+                        BorderBrush="{x:Null}" 
                         Click="CloseWindow_Click">
                     <materialDesign:PackIcon Kind="WindowClose"
                                              Width="27" Height="21"
@@ -83,7 +82,7 @@
             <Rectangle Fill="#0e0e13"
                        Grid.Row="2" 
                        HorizontalAlignment="Left"
-                       Width="260"
+                       Width="280"
                        Opacity="0.6"/>
             <StackPanel  Grid.Row="1" Orientation="Horizontal" Background="#373940" >
                 <Image Source="../ico/developer.ico"  
@@ -96,24 +95,19 @@
                            FontSize="20"/>
                 <Button Name="UsersResult"
                         ToolTip="Show passed tests"
-                            Width="90" Height="55"
+                            Width="80" Height="50"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
-                            Margin="5 0 15 0"
+                            Margin="5 0 10 0"
                             Click="UsersResult_Click">
                     <Image Source="../ico/results.ico"
                                     Width="70" Height="40"
                                     Margin="0 -3 0 0"/>
                 </Button>
-                <Grid Margin="0,5,45,5">
-                    <Rectangle Fill="#0e0e13"
-                               Width="260"
-                               RadiusX="10"
-                               RadiusY="15"
-                               Opacity="0.2"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0,5,25,5" >
                     <Button Name="NewTest"
                             Width="90" Height="55"
-                            ToolTip="{DynamicResource newTest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             HorizontalAlignment="Left" 
@@ -131,7 +125,7 @@
                     <Button Name="SaveTest"
                             Width="90" Height="60"
                             Margin="0 -7 0 0"
-                            ToolTip="{DynamicResource saveTest}"
+                            IsEnabled="False"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"  
                             Click="SaveTest_Click" >
@@ -147,11 +141,10 @@
 
                     <Button Name="OpenTest"
                             Width="95" Height="60"
-                            ToolTip="{DynamicResource openTest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"  
                             Click="OpenTest_Click"
-                            Margin="150,-7,0,0">
+                            Margin="0,-7,0,0">
                         <StackPanel>
                             <TextBlock Text="{DynamicResource openTest}"
                                        Foreground="#e3e0de"/>
@@ -161,16 +154,27 @@
                                                      HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Button>
+                    <Button Name="PrintTest"
+                            Width="95" Height="60"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}" 
+                            IsEnabled="false"
+                            Click="PrintTest_Click"
+                            Margin="0,-7,0,0">
+                        <StackPanel>
+                            <TextBlock Text="{DynamicResource printTest}"
+                                       Foreground="#e3e0de"/>
+                            <materialDesign:PackIcon Kind="Printer"
+                                                     Foreground="#e3e0de"
+                                                     Width="35" Height="35"
+                                                     HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Name="QuestionTools"  Margin="5,5,25,5" Visibility="Visible">
 
-                </Grid>
-                <Grid Name="QuestionTools"  Margin="5,5,55,5" Visibility="Visible">
-                    <Rectangle   Fill="#0e0e13"
-                                 Width="250"
-                                 RadiusX="10" RadiusY="15"
-                                 Opacity="0.2"/>
                     <Button Name="AddQuestion"
                             Width="120" Height="60"
-                            ToolTip="{DynamicResource addQuest}"
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             HorizontalAlignment="Left"
@@ -192,7 +196,6 @@
                             Background="{x:Null}"
                             BorderBrush="{x:Null}"
                             VerticalAlignment="Bottom"
-                            Margin="85 0 0 0"
                             Click="RemoveQuestion_Click">
                         <StackPanel>
                             <TextBlock Text="{DynamicResource delQuest}"
@@ -206,11 +209,11 @@
                         </StackPanel>
 
                     </Button>
-                </Grid>
-                <Button Width="80" Height="60"
+                </StackPanel>
+                <Button Width="90" Height="60"
                         Background="{x:Null}"
                         BorderBrush="{x:Null}"
-                        ToolTip="Выход"
+                        ToolTip="Exit"
                         Margin="0 0 15 0"
                         Click="GoOut">
                     <Image Source="../ico/door.ico"

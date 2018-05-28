@@ -40,7 +40,7 @@ namespace Notest
             }
             else
             {
-                MessageBox.Show("No test selected!");
+                //MessageBox.Show(this.Resources["noselectTest"].ToString());
                 UserWindow user = new UserWindow();
                 user.Show();
                 Close();
@@ -66,7 +66,7 @@ namespace Notest
                     }
                 }
                 Class.CurrentUser.user = user;
-                MessageBox.Show("You came by username " + user.Login);
+                MessageBox.Show((string)Application.Current.Resources["cameBy"] +" " + user.Login);
             }
         }
 
@@ -109,6 +109,11 @@ namespace Notest
                                     isRights += counter;
                                 }
                             }
+                            if (element is TextBox)
+                            {
+                                var textBox = element as TextBox;
+                                isRights += textBox.Text;
+                            }
                             if (element is Label)
                             {
                                 Label meta = element as Label;
@@ -117,10 +122,23 @@ namespace Notest
                                 maxResult += weight;
                                 string rightAnswers = weightAndRight[1];
                                 int countRight = 0;
+                                bool isWritten = false; // рукописный ответ
                                 foreach (char right in rightAnswers.ToCharArray())
                                 {
-                                    if (isRights.Contains(right))
-                                        countRight++;
+                                    if (!isWritten)
+                                    {
+                                        if (right == 't') // если не цифра - ответ рукописный
+                                        {
+                                            isWritten = true;
+                                        }
+                                        if (isRights.Contains(right))
+                                            countRight++;
+                                    }
+                                    else
+                                    {
+                                        countRight = CheckWritten(isRights, rightAnswers.Substring(1)); // передаём rightAnswers без t
+                                        break;
+                                    }
                                 }
                                 result += Rate(countRight, rightAnswers.Length, weight);
                             }
@@ -128,7 +146,8 @@ namespace Notest
                         }
                     }
                 }
-                MessageBox.Show("Congratulations, your result is " + result + "\n Max result is " + maxResult + "\n");
+                MessageBox.Show((string)Application.Current.Resources["congratulation"] + " - " + result + 
+                    "\n"+ (string)Application.Current.Resources["max"] + " - " + maxResult + "\n");
                 using (Context db = new Context())
                 {
                     CompletedTest completedTest = new CompletedTest
@@ -144,9 +163,15 @@ namespace Notest
             }
             catch
             {
-                MessageBox.Show("Unexpected error. Call the programmer");
+                MessageBox.Show((string)Application.Current.Resources["error"]);
                 Close();
             }
+        }
+
+        // проверка письменного ответа
+        private int CheckWritten(string writtenAnswer, string rightsAnswer)
+        {
+            return writtenAnswer.Equals(rightsAnswer) ? writtenAnswer.Length + 1 : 0; // + 1 потому, чтобы учитывать всю длину ответа (нужно для Rate)
         }
 
         // подсчёт промежуточного результата
@@ -198,22 +223,39 @@ namespace Notest
                 int number = 1;
                 string rights = "";
                 var answers = from answer in db.Answers where answer.Question_Id == question.Id select answer;
-                foreach (var answer in answers)
+                if (answers.Count() == 1)
                 {
-                    CheckBox variant = new CheckBox
+                    TextBox textBox = new TextBox
                     {
-                        Content = new TextBlock
-                        {
-                            TextWrapping = TextWrapping.Wrap,
-                            Text = answer.Answer1
-                        }
+                        TextWrapping = TextWrapping.Wrap,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Width = this.Width,
+                        TextAlignment = TextAlignment.Center
                     };
-                    answersPanel.Children.Add(variant);
-                    if (answer.IsRight)
+                    rights += "t" + (answers.First().IsRight ? answers.First().Answer1 : ""); // единственный ответ - это скорее ошибка создателя теста
+                    counter++;
+
+                    answersPanel.Children.Add(textBox);
+                }
+                else
+                {
+                    foreach (var answer in answers)
                     {
-                        rights += number;
+                        CheckBox variant = new CheckBox
+                        {
+                            Content = new TextBlock
+                            {
+                                TextWrapping = TextWrapping.Wrap,
+                                Text = answer.Answer1
+                            }
+                        };
+                        answersPanel.Children.Add(variant);
+                        if (answer.IsRight)
+                        {
+                            rights += number;
+                        }
+                        number++;
                     }
-                    number++;
                 }
                 Label weight = new Label
                 {
@@ -228,10 +270,9 @@ namespace Notest
                 SelectedTest.Children.Add(expander);
                 rights = "";
             }
-            Button finishButton = new Button
-            {
-                Content = "Finish test"
-            };
+
+            Button finishButton = new Button();
+            finishButton.SetResourceReference(Button.ContentProperty, "finish");
             finishButton.Click += OnFinishTest;
             SelectedTest.Children.Add(finishButton);
         }

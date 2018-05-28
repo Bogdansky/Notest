@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Speech;
+using System.Speech.Synthesis;
 
 namespace Notest
 {
@@ -10,11 +14,16 @@ namespace Notest
         public MainWindow()
         {
             InitializeComponent();
-
-            //using (UserContext db = new UserContext())
-            //{
-            //    db.Users.RemoveRange(db.Users);
-            //}
+            foreach(MenuItem item in Languages.Items)
+            {
+                string name = item.Name;
+                item.Height = Languages.Height / Languages.Items.Count;
+                item.ToolTip = name; 
+                item.Header = new Image
+                {
+                    Source = BitmapFrame.Create(new Uri(GetLanguageDirectory()+$"/{name}.png", UriKind.Relative))
+                };
+            }
         }
 
         //РЕГИСТРАЦИЯ
@@ -42,8 +51,6 @@ namespace Notest
                         // добавляем их в бд
                         db.Users.Add(user);
                         db.SaveChanges();
-                        MessageBox.Show("Welcome, " + Class.CurrentUser.user.Login + " !", "", MessageBoxButton.OK, MessageBoxImage.None);
-
                         switch (UserType.SelectedIndex)
                         {
                             case 0:
@@ -93,7 +100,6 @@ namespace Notest
                             if (user.Password == u.Password && user.Login == u.Login)
                             {
                                 isUserFind = true;
-                                MessageBox.Show("Welcome, " + Class.CurrentUser.user.Login + " !", "", MessageBoxButton.OK, MessageBoxImage.None);
                                 if (u.UserType == "User")
                                 {
                                     UserWindow userWindow = new UserWindow();
@@ -110,7 +116,7 @@ namespace Notest
                         }
                         if (isUserFind == false)
                         {
-                            MessageBox.Show("Check the entered data", "", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            MessageBox.Show((string)Application.Current.Resources["datafall"], "", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                     }
 
@@ -131,9 +137,38 @@ namespace Notest
         {
             SystemCommands.MinimizeWindow(this);
         }
+
         #endregion
 
+        private void OnLanguageChange(object sender, RoutedEventArgs e)
+        {
+            MenuItem selectedLang = sender as MenuItem;
+            string lang = selectedLang.Name;
+            DirectoryInfo directory = new DirectoryInfo(GetLanguageDirectory() + "/" + lang);
+            try
+            {
+                FileInfo[] dictionaries = directory.GetFiles();
+                Application.Current.Resources.Clear();
+                foreach (FileInfo dictionary in dictionaries)
+                {
+                    int index = dictionary.FullName.IndexOf($"Languages\\{lang}");
+                    string resourcePath = dictionary.FullName.Substring(index);
+                    var uri = new Uri(resourcePath, UriKind.Relative);
+                    ResourceDictionary resource = Application.LoadComponent(uri) as ResourceDictionary;
+                    Application.Current.Resources.MergedDictionaries.Add(resource);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
 
+        private string GetLanguageDirectory()
+        {
+            DirectoryInfo directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            return directory.Parent.Parent.FullName+"/Languages";
+        }
     }
 
 
