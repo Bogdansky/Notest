@@ -17,6 +17,17 @@
     <Viewbox Stretch="Uniform">
         <Grid>
             <Grid Height="25" Width="810" VerticalAlignment="Top">
+                <Menu Name="Languages" 
+                      Background="{x:Null}" 
+                      Margin="500,0,146,0" 
+                      HorizontalContentAlignment="Center">
+                    <MenuItem Name="Русский" Click="OnLanguageChange" HorizontalContentAlignment="Center">
+
+                    </MenuItem>
+                    <MenuItem Name="English" Click="OnLanguageChange" HorizontalContentAlignment="Center">
+
+                    </MenuItem>
+                </Menu>
                 <Button Width="45" Height="Auto"
                         HorizontalAlignment="Right"
                         Margin="0 0 40 0"
@@ -112,14 +123,7 @@
                      Content="{DynamicResource signIn}"/>
 
                 </StackPanel>
-                <Menu Name="Languages" Grid.ColumnSpan="2" Margin="351,204,0,183" Width="100.8" Height="72.8" Background="{x:Null}" >
-                    <MenuItem Name="Русский" Click="OnLanguageChange">
 
-                    </MenuItem>
-                    <MenuItem Name="English" Click="OnLanguageChange">
-
-                    </MenuItem>
-                </Menu>
                 <StackPanel Grid.Column="2" Width="250" Height="400">
                     <StackPanel  Margin="0 20 0 0"  Orientation="Vertical">
                         <Image  Source="ico\add.ico"

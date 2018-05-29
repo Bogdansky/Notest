@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Speech;
 using System.Speech.Synthesis;
+using System.Windows.Media;
 
 namespace Notest
 {
@@ -17,11 +18,13 @@ namespace Notest
             foreach(MenuItem item in Languages.Items)
             {
                 string name = item.Name;
-                item.Height = Languages.Height / Languages.Items.Count;
-                item.ToolTip = name; 
-                item.Header = new Image
+                item.Height = 25;
+                item.Width = 50;
+                item.ToolTip = name;
+                item.Margin = new Thickness(10, 0, 0, 0);
+                item.Background = new ImageBrush
                 {
-                    Source = BitmapFrame.Create(new Uri(GetLanguageDirectory()+$"/{name}.png", UriKind.Relative)),
+                    ImageSource = BitmapFrame.Create(new Uri(GetLanguageDirectory()+$"/{name}.png", UriKind.Relative)),
                     Opacity = 0.7
                 };
             }
