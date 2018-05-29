@@ -102,10 +102,11 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*"
                                         Binding="{Binding UserLogin}"
-                                        Header="Логин"                                        />
-                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="Тема"/>
-                    <DataGridTextColumn Binding="{Binding TestName}" Header="Название"/>
-                    <DataGridTextColumn Width="*" Binding="{Binding Result}" Header="Результат"/>
+                                        Header="{DynamicResource login}"                                        />
+                    <DataGridTextColumn Binding="{Binding TestTheme}" Header="{DynamicResource topic}"/>
+                    <DataGridTextColumn Binding="{Binding TestName}" Header="{DynamicResource header}"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding Result}" Header="{DynamicResource result}"/>
+                    <DataGridTextColumn Width="*" Binding="{Binding Date}" Header="{DynamicResource date}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

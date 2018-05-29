@@ -26,8 +26,10 @@
     <lang:String x:Key="muteRemove">Не может быть удалено</lang:String>
     <lang:String x:Key="noOut">Невозможно выйти!</lang:String>
     <lang:String x:Key="testEx">Тест уже существует!</lang:String>
+    <lang:String x:Key="questEx">Вопрос уже существует!</lang:String>
     <lang:String x:Key="input">Введите данные!</lang:String>
     <lang:String x:Key="onlyNumLat">Вы можете использовать только цифры и буквы латинского алфавита</lang:String>
     <lang:String x:Key="readyToPrint">Тест готов к печати</lang:String>
     <lang:String x:Key="printError">Ошибка печати</lang:String>
+    <lang:String x:Key="emptySave">Здесь нечего сохранять</lang:String>
 </ResourceDictionary>

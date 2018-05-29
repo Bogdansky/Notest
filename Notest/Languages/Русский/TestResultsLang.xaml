@@ -4,5 +4,6 @@
                     xmlns:lang="clr-namespace:System;assembly=mscorlib">
     <lang:String x:Key="login">Логин</lang:String>
     <lang:String x:Key="result">Результат</lang:String>
+    <lang:String x:Key="date">Дата</lang:String>
     <lang:String x:Key="finish">Завершить тест</lang:String>
 </ResourceDictionary>

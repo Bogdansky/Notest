@@ -34,7 +34,8 @@ namespace Notest
                         UserLogin = test.UserLogin,
                         TestName = currentTest.Header,
                         TestTheme = currentTest.Topic,
-                        Result = test.Result
+                        Result = test.Result,
+                        Date = test.Date
                     };
                     completedTests.Add(compl);
                 }

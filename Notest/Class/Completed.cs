@@ -12,6 +12,7 @@ namespace Notest.Class
         public string TestTheme { get; set; }
         public string TestName { get; set; }
         public int Result { get; set; }
+        public string Date { get; set; }
 
         public Completed()
         {
@@ -19,6 +20,7 @@ namespace Notest.Class
             TestTheme = "тема";
             TestName = "название";
             Result = 0;
+            Date = DateTime.Now.ToString();
         }
     }
 }

@@ -13,6 +13,7 @@
                 <DataGridTextColumn Binding="{Binding TestTheme}" Header="{DynamicResource topic}"/>
                 <DataGridTextColumn Binding="{Binding TestName}" Header="{DynamicResource header}"/>
                 <DataGridTextColumn Width="84" Binding="{Binding Result}" Header="{DynamicResource result}"/>
+                <DataGridTextColumn Width="120" Binding="{Binding Date}" Header="{DynamicResource date}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

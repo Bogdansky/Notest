@@ -26,8 +26,10 @@
     <lang:String x:Key="muteRemove">Сan not be removed</lang:String>
     <lang:String x:Key="noOut">You shall not pass!</lang:String>
     <lang:String x:Key="testEx">Test is already exist!</lang:String>
+    <lang:String x:Key="questEx">Question is already exist!</lang:String>
     <lang:String x:Key="input">Enter the data!</lang:String>
     <lang:String x:Key="onlyNumLat">You can only use numbers and letters of the Latin alphabet</lang:String>
     <lang:String x:Key="readyToPrint">The test is ready to print</lang:String>
     <lang:String x:Key="printError">The print error</lang:String>
+    <lang:String x:Key="emptySave">There is nothing to save</lang:String>
 </ResourceDictionary>
