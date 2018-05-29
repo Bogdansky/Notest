@@ -154,7 +154,8 @@ namespace Notest
                     {
                         Result = result,
                         TestId = CurrentTest.test.Id,
-                        UserLogin = Class.CurrentUser.user.Login
+                        UserLogin = Class.CurrentUser.user.Login,
+                        Date = DateTime.Now.ToString()
                     };
                     db.CompletedTest.Add(completedTest);
                     db.SaveChanges();

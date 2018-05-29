@@ -21,7 +21,8 @@ namespace Notest
                 item.ToolTip = name; 
                 item.Header = new Image
                 {
-                    Source = BitmapFrame.Create(new Uri(GetLanguageDirectory()+$"/{name}.png", UriKind.Relative))
+                    Source = BitmapFrame.Create(new Uri(GetLanguageDirectory()+$"/{name}.png", UriKind.Relative)),
+                    Opacity = 0.7
                 };
             }
         }
